@@ -526,7 +526,86 @@
         }
 
         /* ============================================
+           SEÇÃO EXPERIÊNCIA PROFISSIONAL
+           Onde estou trabalhando atualmente - PREENCHA COM DADOS DO LINKEDIN
+           ============================================ */
+        .experience-timeline {
+            position: relative;
+            padding: 1rem 0;
+            margin: 1rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .experience-item {
+            position: relative;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .experience-period {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .period-badge {
+            background: rgba(100, 150, 255, 0.2);
+            color: #ffffff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: #c0c0c0;
+            display: flex;
+            align-items: center;
+        }
+
+        .company-icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .experience-description {
+            color: #d0d0d0;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .experience-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .exp-tag {
+            background: rgba(100, 150, 255, 0.2);
+            color: #ffffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================
            SEÇÃO SKILLS TÉCNICAS
+           Principais tecnologias e ferramentas
            ============================================ */
         .skills-grid {
             display: grid;
@@ -1364,6 +1443,7 @@
         <ul>
             <li><a href="#home" class="nav-link">Início</a></li>
             <li><a href="#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="#experiencia" class="nav-link">Experiência</a></li>
             <li><a href="#formacao" class="nav-link">Formação</a></li>
             <li><a href="#skills" class="nav-link">Skills</a></li>
             <li><a href="#projetos" class="nav-link">Projetos</a></li>
@@ -1479,6 +1559,66 @@
                     <li>Desenvolvimento de APIs</li>
                     <li>Boas práticas de desenvolvimento e organização de código</li>
                 </ul>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO EXPERIÊNCIA PROFISSIONAL
+             Onde estou trabalhando atualmente - PREENCHA COM DADOS DO LINKEDIN
+             ============================================ -->
+        <section id="experiencia" class="card">
+            <h2 class="section-title">Experiência Profissional</h2>
+            <p class="section-subtitle">Minha trajetória no desenvolvimento de software</p>
+
+            <div class="experience-timeline">
+                <!-- EXPERIÊNCIA ATUAL -->
+                <div class="experience-item">
+                    <div class="experience-period">
+                        <span class="period-badge current">Atual</span>
+                        <span class="period-date">Nov 2025 - Presente</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Desenvolvedor Júnior</h3>
+                        <h4 class="experience-company">
+                            <span class="company-icon">🏢</span>
+                            DaringTech
+                        </h4>
+                        <p class="experience-description">
+                            Desenvolvimento e manutenção de sistemas backend utilizando Java e Spring Boot.
+                            Responsável por implementação de APIs REST, integração com bancos de dados,
+                            e otimização de performance de aplicações.
+                        </p>
+                        <div class="experience-tags">
+                            <span class="exp-tag">Java</span>
+                            <span class="exp-tag">Spring Boot</span>
+                            <span class="exp-tag">MySQL</span>
+                            <span class="exp-tag">REST API</span>
+                            <span class="exp-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⚠️ Se tiver mais experiências anteriores em TECNOLOGIA, descomente e preencha:
+                <div class="experience-item">
+                    <div class="experience-period">
+                        <span class="period-date">2022 - 2024</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">[Cargo Anterior]</h3>
+                        <h4 class="experience-company">
+                            <span class="company-icon">🏢</span>
+                            [Empresa Anterior]
+                        </h4>
+                        <p class="experience-description">
+                            [Descrição do que você fazia]
+                        </p>
+                        <div class="experience-tags">
+                            <span class="exp-tag">Tecnologia 1</span>
+                            <span class="exp-tag">Tecnologia 2</span>
+                        </div>
+                    </div>
+                </div>
+                -->
             </div>
         </section>
 
