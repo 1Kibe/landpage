@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ryan Adrian - Desenvolvedor Backend especializado em Java, Spring Boot e Arquitetura de Sistemas. Conheça meus projetos e entre em contato.">
+    <meta name="keywords" content="Ryan Adrian, Desenvolvedor Backend, Java, Spring Boot, API REST, MySQL, MongoDB, Desenvolvedor Java">
+    <meta name="author" content="Ryan Adrian">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ryan Adrian - Desenvolvedor Backend">
+    <meta property="og:description" content="Desenvolvedor Backend especializado em Java, Spring Boot e Arquitetura de Sistemas">
+    <meta property="og:url" content="https://github.com/1Kibe">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ryan Adrian - Desenvolvedor Backend">
+    <meta name="twitter:description" content="Desenvolvedor Backend especializado em Java, Spring Boot e Arquitetura de Sistemas">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+    <title>Ryan Adrian - Backend Developer | Interactive Portfolio</title>
+
+    <style>
+        /* ============================================
+           RESET E VARIÁVEIS
+           ============================================ */
+        :root {
+            --neon-green: #39ff14;
+            --neon-pink: #ff10f0;
+            --neon-blue: #00f0ff;
+            --dark-bg: #0d0221;
+            --dark-secondary: #150837;
+            --dark-card: #1a0b3d;
+            --text: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--dark-bg);
+            color: var(--text);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ============================================
+           SNAKE GAME BACKGROUND - EFEITO COBRINHA
+           ============================================ */
+        #snake-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           MATRIX RAIN EFFECT
+           ============================================ */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           CURSOR PERSONALIZADO COM RASTRO
+           ============================================ */
+        body {
+            cursor: none;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--neon-green);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* ============================================
+           GLITCH EFFECT
+           ============================================ */
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% {
+                transform: translate(0);
+            }
+            92% {
+                transform: translate(-2px, 2px);
+            }
+            94% {
+                transform: translate(2px, -2px);
+            }
+            96% {
+                transform: translate(-2px, -2px);
+            }
+            98% {
+                transform: translate(2px, 2px);
+            }
+        }
+
+        /* ============================================
+           TERMINAL HEADER
+           ============================================ */
+        .terminal-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 2, 33, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--neon-green);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .terminal-title {
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .terminal-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .terminal-nav a {
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .terminal-nav a::before {
+            content: '>';
+            margin-right: 0.5rem;
+            color: var(--neon-green);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .terminal-nav a:hover::before,
+        .terminal-nav a.active::before {
+            opacity: 1;
+        }
+
+        .terminal-nav a:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .content {
+            position: relative;
+            z-index: 1;
+            margin-top: 80px;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ============================================
+           HERO SECTION - TERMINAL STYLE
+           ============================================ */
+        .hero {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-terminal {
+            background: rgba(26, 11, 61, 0.8);
+            border: 2px solid var(--neon-green);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.3);
+            max-width: 800px;
+        }
+
+        .terminal-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .terminal-prompt {
+            color: var(--neon-green);
+            margin-right: 0.5rem;
+        }
+
+        .terminal-text {
+            color: var(--text);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green);
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        .typing-effect {
+            border-right: 3px solid var(--neon-green);
+            animation: blink 0.7s infinite;
+            padding-right: 5px;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--neon-green); }
+            51%, 100% { border-color: transparent; }
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px var(--neon-pink);
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: 2px solid var(--neon-green);
+            background: transparent;
+            color: var(--neon-green);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--neon-green);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-secondary {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn-secondary::before {
+            background: var(--neon-pink);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        /* ============================================
+           PIXEL ART AVATAR
+           ============================================ */
+        .pixel-avatar {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 20px var(--neon-green));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%); }
+            50% { transform: translateY(-55%); }
+        }
+
+        /* ============================================
+           CARDS NEON
+           ============================================ */
+        .section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text);
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .neon-card {
+            background: rgba(26, 11, 61, 0.6);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(57, 255, 20, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .neon-card:hover::before {
+            left: 100%;
+        }
+
+        .neon-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-pink));
+        }
+
+        .card-title {
+            color: var(--neon-pink);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .card-text {
+            color: var(--text);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* ============================================
+           SKILLS - PROGRESS BARS ANIMADAS
+           ============================================ */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--neon-green);
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+            box-shadow: 0 0 10px var(--neon-green);
+            transition: width 2s ease;
+            animation: pulse-bar 2s infinite;
+        }
+
+        @keyframes pulse-bar {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* ============================================
+           PROJECTS - CARD FLIP
+           ============================================ */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            perspective: 1000px;
+            height: 400px;
+        }
+
+        .project-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .project-card:hover .project-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .project-card-front,
+        .project-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 2px solid var(--neon-pink);
+            border-radius: 8px;
+            padding: 2rem;
+            background: rgba(26, 11, 61, 0.8);
+        }
+
+        .project-card-back {
+            transform: rotateY(180deg);
+            border-color: var(--neon-green);
+        }
+
+        .project-title {
+            color: var(--neon-pink);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--neon-green);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--neon-green);
+            background: rgba(57, 255, 20, 0.1);
+        }
+
+        /* ============================================
+           CONTACT - TERMINAL STYLE
+           ============================================ */
+        .contact-terminal {
+            background: rgba(26, 11, 61, 0.8);
+            border: 2px solid var(--neon-green);
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid var(--neon-blue);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 0 10px var(--neon-pink));
+        }
+
+        /* ============================================
+           FOOTER MATRIX
+           ============================================ */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 2px solid var(--neon-green);
+            margin-top: 4rem;
+            color: var(--text);
+        }
+
+        /* ============================================
+           EASTER EGG - KONAMI CODE
+           ============================================ */
+        .easter-egg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(13, 2, 33, 0.98);
+            border: 3px solid var(--neon-pink);
+            border-radius: 12px;
+            padding: 3rem;
+            z-index: 10000;
+            text-align: center;
+            transition: transform 0.5s ease;
+            box-shadow: 0 0 50px var(--neon-pink);
+        }
+
+        .easter-egg.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .easter-egg h2 {
+            color: var(--neon-pink);
+            font-size: 2rem;
+            text-shadow: 0 0 20px var(--neon-pink);
+            margin-bottom: 1rem;
+        }
+
+        /* ============================================
+           PARTICLE EFFECT
+           ============================================ */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-rise 2s ease-out forwards;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        @keyframes particle-rise {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
+        @media (max-width: 768px) {
+            .terminal-nav {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .pixel-avatar {
+                display: none;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .cursor,
+            .cursor-dot {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         CANVAS BACKGROUNDS
+         ============================================ -->
+    <canvas id="snake-canvas"></canvas>
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- ============================================
+         CUSTOM CURSOR
+         ============================================ -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- ============================================
+         TERMINAL HEADER
+         ============================================ -->
+    <header class="terminal-header">
+        <div class="terminal-title">ryan@portfolio:~$</div>
+        <nav class="terminal-nav">
+            <a href="#home" class="active">./home</a>
+            <a href="#about">./about</a>
+            <a href="#skills">./skills</a>
+            <a href="#projects">./projects</a>
+            <a href="#contact">./contact</a>
+        </nav>
+    </header>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <div class="content">
+        <div class="container">
+            <!-- HERO SECTION -->
+            <section id="home" class="hero">
+                <div class="hero-terminal">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">ryan@dev:~$</span>
+                        <span class="terminal-text">whoami</span>
+                    </div>
+                    <h1 class="hero-title glitch">RYAN ADRIAN</h1>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">&gt;</span>
+                        <span class="terminal-text typing-effect">Backend Developer | Java Specialist</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-text">Desenvolvedor focado em sistemas robustos e arquitetura escalável.</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-text">Especialista em Java, Spring Boot e soluções backend de alta performance.</span>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-value">2.5+</div>
+                            <div class="stat-label">ANOS</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">8+</div>
+                            <div class="stat-label">PROJETOS</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">TECNOLOGIAS</div>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn"><span>VER_PROJETOS.sh</span></a>
+                        <a href="#contact" class="btn btn-secondary"><span>CONTATO.exe</span></a>
+                    </div>
+                </div>
+
+                <img src="docs/images/IMG_20250919_115501_035.webp" alt="Ryan Adrian" class="pixel-avatar">
+            </section>
+
+            <!-- ABOUT SECTION -->
+            <section id="about" class="section">
+                <h2 class="section-title">&lt;SOBRE_MIM /&gt;</h2>
+                <p class="section-subtitle">// Desenvolvedor Backend com foco em qualidade e performance</p>
+
+                <div class="cards-grid">
+                    <div class="neon-card">
+                        <div class="card-icon">💻</div>
+                        <h3 class="card-title">Código Limpo</h3>
+                        <p class="card-text">
+                            Disciplina no desenvolvimento e atenção aos detalhes. Cada linha de código importa.
+                        </p>
+                    </div>
+                    <div class="neon-card">
+                        <div class="card-icon">🧠</div>
+                        <h3 class="card-title">Pensamento Lógico</h3>
+                        <p class="card-text">
+                            Resolução de problemas complexos através de soluções eficientes e bem estruturadas.
+                        </p>
+                    </div>
+                    <div class="neon-card">
+                        <div class="card-icon">📚</div>
+                        <h3 class="card-title">Aprendizado Contínuo</h3>
+                        <p class="card-text">
+                            Constantemente evoluindo e aprimorando habilidades em novas tecnologias.
+                        </p>
+                    </div>
+                    <div class="neon-card">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Foco em Qualidade</h3>
+                        <p class="card-text">
+                            Comprometimento com excelência técnica e entrega de software de alta qualidade.
+                        </p>
+                    </div>
+                    <div class="neon-card">
+                        <div class="card-icon">⚡</div>
+                        <h3 class="card-title">Backend Specialist</h3>
+                        <p class="card-text">
+                            Especializado em Java, Spring Boot e arquitetura de sistemas escaláveis.
+                        </p>
+                    </div>
+                    <div class="neon-card">
+                        <div class="card-icon">🚀</div>
+                        <h3 class="card-title">Performance</h3>
+                        <p class="card-text">
+                            Otimização de código e implementação de soluções de alta performance.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SKILLS SECTION -->
+            <section id="skills" class="section">
+                <h2 class="section-title">[ TECH_STACK ]</h2>
+                <p class="section-subtitle">// Tecnologias e ferramentas que domino</p>
+
+                <div class="skills-container">
+                    <div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Java & Spring Boot</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>MySQL & MariaDB</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>TypeScript & Node.js</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>MongoDB</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>API REST</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Git & GitHub</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Prisma ORM</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Linux</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJECTS SECTION -->
+            <section id="projects" class="section">
+                <h2 class="section-title">{ PROJETOS }</h2>
+                <p class="section-subtitle">// Passe o mouse nos cards para ver detalhes</p>
+
+                <div class="projects-grid">
+                    <!-- Projeto 1 -->
+                    <div class="project-card">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <h3 class="project-title">Sistema de Condomínios</h3>
+                                <p>Sistema completo de gestão com Java e POO</p>
+                                <div class="project-tags">
+                                    <span class="tag">Java</span>
+                                    <span class="tag">POO</span>
+                                    <span class="tag">Backend</span>
+                                </div>
+                            </div>
+                            <div class="project-card-back">
+                                <h4 style="color: var(--neon-green); margin-bottom: 1rem;">Funcionalidades:</h4>
+                                <ul style="color: var(--text); line-height: 2;">
+                                    <li>• Gestão de moradores</li>
+                                    <li>• Controle de áreas comuns</li>
+                                    <li>• Sistema de reservas</li>
+                                    <li>• Arquitetura em camadas</li>
+                                </ul>
+                                <a href="https://github.com/1Kibe/Sistema-de-Condominios" target="_blank" class="btn" style="margin-top: 2rem;">
+                                    <span>Ver Código</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projeto 2 -->
+                    <div class="project-card">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <h3 class="project-title">API de Estacionamento</h3>
+                                <p>API REST com Spring Boot</p>
+                                <div class="project-tags">
+                                    <span class="tag">Java</span>
+                                    <span class="tag">Spring</span>
+                                    <span class="tag">API REST</span>
+                                </div>
+                            </div>
+                            <div class="project-card-back">
+                                <h4 style="color: var(--neon-green); margin-bottom: 1rem;">Recursos:</h4>
+                                <ul style="color: var(--text); line-height: 2;">
+                                    <li>• Controle de veículos</li>
+                                    <li>• Cálculo de valores</li>
+                                    <li>• Gestão de vagas</li>
+                                    <li>• Endpoints RESTful</li>
+                                </ul>
+                                <a href="https://github.com/1Kibe/Estacionamento-API-java" target="_blank" class="btn" style="margin-top: 2rem;">
+                                    <span>Ver Código</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Projeto 3 -->
+                    <div class="project-card">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <h3 class="project-title">Backend TypeScript</h3>
+                                <p>Aplicação moderna com Prisma ORM</p>
+                                <div class="project-tags">
+                                    <span class="tag">TypeScript</span>
+                                    <span class="tag">Prisma</span>
+                                    <span class="tag">Node.js</span>
+                                </div>
+                            </div>
+                            <div class="project-card-back">
+                                <h4 style="color: var(--neon-green); margin-bottom: 1rem;">Stack:</h4>
+                                <ul style="color: var(--text); line-height: 2;">
+                                    <li>• TypeScript tipado</li>
+                                    <li>• Prisma ORM moderno</li>
+                                    <li>• Arquitetura escalável</li>
+                                    <li>• Código limpo</li>
+                                </ul>
+                                <a href="https://github.com/1Kibe/BackEndTS" target="_blank" class="btn" style="margin-top: 2rem;">
+                                    <span>Ver Código</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="https://github.com/1Kibe?tab=repositories" target="_blank" class="btn">
+                        <span>VER_TODOS_PROJETOS.sh</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CONTACT SECTION -->
+            <section id="contact" class="section">
+                <h2 class="section-title">[ CONNECT ]</h2>
+                <p class="section-subtitle">// Entre em contato para colaborações</p>
+
+                <div class="contact-terminal">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">ryan@dev:~$</span>
+                        <span class="terminal-text">cat contact.txt</span>
+                    </div>
+
+                    <a href="https://wa.me/5543982338000?text=Olá%20Ryan!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar." target="_blank" class="contact-method">
+                        <div class="contact-icon">💬</div>
+                        <div>
+                            <div style="color: var(--neon-green); font-weight: bold;">WhatsApp</div>
+                            <div>(43) 98233-8000</div>
+                        </div>
+                    </a>
+
+                    <a href="mailto:ryanadrianpra2022@gmail.com" class="contact-method">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <div style="color: var(--neon-green); font-weight: bold;">Email</div>
+                            <div>ryanadrianpra2022@gmail.com</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/ryan-adrian-919b1930b" target="_blank" class="contact-method">
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <div style="color: var(--neon-green); font-weight: bold;">LinkedIn</div>
+                            <div>/ryan-adrian-919b1930b</div>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/1Kibe" target="_blank" class="contact-method">
+                        <div class="contact-icon">🐙</div>
+                        <div>
+                            <div style="color: var(--neon-green); font-weight: bold;">GitHub</div>
+                            <div>github.com/1Kibe</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer>
+        <p style="color: var(--neon-green);">ryan@portfolio:~$ exit</p>
+        <p>&copy; 2026 Ryan Adrian - Backend Developer</p>
+        <p style="opacity: 0.6; font-size: 0.8rem;">// Desenvolvido com dedicação e muito código</p>
+    </footer>
+
+    <!-- ============================================
+         EASTER EGG
+         ============================================ -->
+    <div class="easter-egg" id="easterEgg">
+        <h2>🎮 EASTER EGG DESBLOQUEADO!</h2>
+        <p style="color: var(--text); margin: 1rem 0;">Você encontrou o segredo! 🚀</p>
+        <p style="color: var(--neon-green);">Konami Code Master!</p>
+        <button class="btn" onclick="closeEasterEgg()" style="margin-top: 1rem;">
+            <span>FECHAR</span>
+        </button>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // ============================================
+        // SNAKE GAME BACKGROUND
+        // ============================================
+        const snakeCanvas = document.getElementById('snake-canvas');
+        const snakeCtx = snakeCanvas.getContext('2d');
+
+        snakeCanvas.width = window.innerWidth;
+        snakeCanvas.height = window.innerHeight;
+
+        class Snake {
+            constructor() {
+                this.segments = [];
+                this.length = 20;
+                this.cellSize = 20;
+                this.direction = { x: 1, y: 0 };
+                this.hue = Math.random() * 360;
+
+                // Posição inicial aleatória
+                const startX = Math.floor(Math.random() * (snakeCanvas.width / this.cellSize)) * this.cellSize;
+                const startY = Math.floor(Math.random() * (snakeCanvas.height / this.cellSize)) * this.cellSize;
+
+                for (let i = 0; i < this.length; i++) {
+                    this.segments.push({ x: startX - i * this.cellSize, y: startY });
+                }
+            }
+
+            update() {
+                // Nova cabeça
+                const head = {
+                    x: this.segments[0].x + this.direction.x * this.cellSize,
+                    y: this.segments[0].y + this.direction.y * this.cellSize
+                };
+
+                // Wrap around
+                if (head.x < 0) head.x = snakeCanvas.width - this.cellSize;
+                if (head.x >= snakeCanvas.width) head.x = 0;
+                if (head.y < 0) head.y = snakeCanvas.height - this.cellSize;
+                if (head.y >= snakeCanvas.height) head.y = 0;
+
+                this.segments.unshift(head);
+                this.segments.pop();
+
+                // Mudar direção aleatoriamente
+                if (Math.random() < 0.02) {
+                    const directions = [
+                        { x: 1, y: 0 },
+                        { x: -1, y: 0 },
+                        { x: 0, y: 1 },
+                        { x: 0, y: -1 }
+                    ];
+                    this.direction = directions[Math.floor(Math.random() * directions.length)];
+                }
+
+                this.hue = (this.hue + 0.5) % 360;
+            }
+
+            draw() {
+                this.segments.forEach((segment, index) => {
+                    const opacity = 1 - (index / this.segments.length) * 0.7;
+                    snakeCtx.fillStyle = `hsla(${this.hue}, 100%, 50%, ${opacity})`;
+                    snakeCtx.fillRect(segment.x, segment.y, this.cellSize - 2, this.cellSize - 2);
+                });
+            }
+        }
+
+        // Criar múltiplas cobrinhas
+        const snakes = [];
+        for (let i = 0; i < 5; i++) {
+            snakes.push(new Snake());
+        }
+
+        function animateSnakes() {
+            snakeCtx.fillStyle = 'rgba(13, 2, 33, 0.1)';
+            snakeCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+            snakes.forEach(snake => {
+                snake.update();
+                snake.draw();
+            });
+
+            requestAnimationFrame(animateSnakes);
+        }
+
+        animateSnakes();
+
+        // ============================================
+        // MATRIX RAIN EFFECT
+        // ============================================
+        const matrixCanvas = document.getElementById('matrix-canvas');
+        const matrixCtx = matrixCanvas.getContext('2d');
+
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+
+        const matrix = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        const columns = matrixCanvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            matrixCtx.fillStyle = 'rgba(13, 2, 33, 0.05)';
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+            matrixCtx.fillStyle = '#39ff14';
+            matrixCtx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrix[Math.floor(Math.random() * matrix.length)];
+                matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        // ============================================
+        // CUSTOM CURSOR
+        // ============================================
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            setTimeout(() => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            }, 50);
+        });
+
+        // Partículas no clique
+        document.addEventListener('click', (e) => {
+            for (let i = 0; i < 6; i++) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+            document.body.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 2000);
+        }
+
+        // ============================================
+        // NAVIGATION ACTIVE
+        // ============================================
+        const navLinks = document.querySelectorAll('.terminal-nav a');
+        const sections = document.querySelectorAll('.section, .hero');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ============================================
+        // SMOOTH SCROLL
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ============================================
+        // KONAMI CODE EASTER EGG
+        // ============================================
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    document.getElementById('easterEgg').classList.add('active');
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function closeEasterEgg() {
+            document.getElementById('easterEgg').classList.remove('active');
+        }
+
+        // ============================================
+        // TYPING EFFECT
+        // ============================================
+        const typingText = document.querySelector('.typing-effect');
+        const text = typingText.textContent;
+        typingText.textContent = '';
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < text.length) {
+                typingText.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        setTimeout(typeWriter, 1000);
+
+        // ============================================
+        // RESIZE HANDLER
+        // ============================================
+        window.addEventListener('resize', () => {
+            snakeCanvas.width = window.innerWidth;
+            snakeCanvas.height = window.innerHeight;
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+        });
+
+        console.log('%c🎮 PORTFOLIO v3.0 - INTERACTIVE EDITION', 'color: #39ff14; font-size: 20px; font-weight: bold;');
+        console.log('%c💻 Backend Developer | Ryan Adrian', 'color: #ff10f0; font-size: 14px;');
+        console.log('%c🔐 Try the Konami Code: ↑ ↑ ↓ ↓ ← → ← → B A', 'color: #00f0ff; font-size: 12px;');
+    </script>
+</body>
+</html>
