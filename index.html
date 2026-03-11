@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ryan Adrian - Desenvolvedor Backend especializado em Java, Spring Boot e Arquitetura de Sistemas. Conheça meus projetos e entre em contato.">
+    <meta name="keywords" content="Ryan Adrian, Desenvolvedor Backend, Java, Spring Boot, API REST, MySQL, MongoDB, Desenvolvedor Java">
+    <meta name="author" content="Ryan Adrian">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ryan Adrian - Desenvolvedor Backend">
+    <meta property="og:description" content="Desenvolvedor Backend especializado em Java, Spring Boot e Arquitetura de Sistemas">
+    <meta property="og:url" content="https://github.com/1Kibe">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ryan Adrian - Desenvolvedor Backend">
+    <meta name="twitter:description" content="Desenvolvedor Backend especializado em Java, Spring Boot e Arquitetura de Sistemas">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+    <title>Ryan Adrian - Desenvolvedor Backend | Java & Spring Boot</title>
+
+    <style>
+        /* ============================================
+           RESET E CONFIGURAÇÕES GERAIS
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            background-color: #0a0a0a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           FUNDO ESPACIAL COM ESTRELAS ANIMADAS
+           ============================================ */
+        #stars-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+        }
+
+        /* Camada de estrelas com parallax */
+        #stars-layer {
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 120%;
+            height: 140%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Nebulosa de fundo */
+        #stars-background::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(100, 150, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(150, 100, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(50, 100, 255, 0.02) 0%, transparent 40%),
+                radial-gradient(circle at 60% 90%, rgba(100, 50, 255, 0.02) 0%, transparent 40%);
+            animation: nebulaSlow 60s ease-in-out infinite alternate;
+        }
+
+        /* Galáxia espiral */
+        #stars-background::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background:
+                radial-gradient(ellipse at center,
+                    transparent 0%,
+                    rgba(100, 150, 255, 0.015) 30%,
+                    rgba(150, 100, 255, 0.015) 50%,
+                    transparent 70%
+                );
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation: galaxyRotate 120s linear infinite;
+        }
+
+        @keyframes nebulaSlow {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+            50% { transform: scale(1.1) rotate(10deg); opacity: 0.7; }
+            100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+        }
+
+        @keyframes galaxyRotate {
+            0% { transform: translate(-50%, -50%) rotate(45deg); }
+            100% { transform: translate(-50%, -50%) rotate(405deg); }
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        /* Estrelas pequenas */
+        .star.small {
+            width: 1px;
+            height: 1px;
+        }
+
+        /* Estrelas médias */
+        .star.medium {
+            width: 2px;
+            height: 2px;
+            box-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Estrelas grandes (mais raras) */
+        .star.large {
+            width: 3px;
+            height: 3px;
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Estrelas brilhantes com efeito de cruz */
+        .star.bright {
+            width: 2px;
+            height: 2px;
+            box-shadow:
+                0 0 4px #fff,
+                0 0 8px rgba(100, 150, 255, 0.8),
+                0 0 12px rgba(100, 150, 255, 0.5);
+            animation: twinkleBright 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes twinkleBright {
+            0%, 100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ============================================
+           CONTAINER PRINCIPAL E CARDS
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Estilo base para todos os cards */
+        .card {
+            background: rgba(60, 60, 60, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(100, 150, 255, 0.05),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animação de entrada para os cards */
+        .card.fade-in {
+            animation: cardFadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           SEÇÃO HERO - APRESENTAÇÃO INICIAL
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            background: rgba(60, 60, 60, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                transparent,
+                transparent,
+                rgba(100, 150, 255, 0.15),
+                transparent,
+                transparent,
+                rgba(150, 100, 255, 0.15),
+                transparent,
+                transparent
+            );
+            border-radius: 12px;
+            z-index: -1;
+            animation: borderRotate 8s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .hero .description {
+            font-size: 1.05rem;
+            color: #909090;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Badges/Tags no Hero */
+        .hero-badges {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .hero-badge {
+            background: rgba(100, 150, 255, 0.12);
+            border: 1px solid rgba(100, 150, 255, 0.25);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #c0c0c0;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+        }
+
+        .hero-badge:hover {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: rgba(100, 150, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 150, 255, 0.15);
+            color: #e0e0e0;
+        }
+
+        /* Botões de ação do Hero */
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: rgba(100, 150, 255, 0.5);
+            position: relative;
+        }
+
+        .btn-primary::before {
+            background: rgba(100, 150, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: rgba(100, 150, 255, 0.4);
+            border-color: rgba(100, 150, 255, 0.8);
+            box-shadow: 0 5px 25px rgba(100, 150, 255, 0.3);
+        }
+
+        /* ============================================
+           TÍTULOS DE SEÇÕES
+           ============================================ */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================
+           SEÇÃO SOBRE MIM
+           ============================================ */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .profile-image {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #c0c0c0;
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .highlight-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid rgba(100, 150, 255, 0.5);
+        }
+
+        .highlight-item::before {
+            content: "✓ ";
+            color: rgba(100, 150, 255, 0.8);
+            font-weight: bold;
+        }
+
+        /* ============================================
+           SEÇÃO FORMAÇÃO
+           ============================================ */
+        .education-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid rgba(100, 150, 255, 0.5);
+        }
+
+        .education-item h3 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item .institution {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .education-item ul {
+            margin-left: 1.5rem;
+            color: #c0c0c0;
+        }
+
+        .education-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ============================================
+           SEÇÃO SKILLS TÉCNICAS
+           ============================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 3px solid rgba(100, 150, 255, 0.5);
+        }
+
+        .skill-category h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.6rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            color: #d0d0d0;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-item::before {
+            content: "▹ ";
+            color: rgba(100, 150, 255, 0.8);
+            margin-right: 0.5rem;
+        }
+
+        /* ============================================
+           SEÇÃO FERRAMENTAS E CONHECIMENTOS
+           ============================================ */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tool-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            background: rgba(100, 150, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* ============================================
+           SEÇÃO PROJETOS
+           ============================================ */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(100, 150, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .project-card h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #b0b0b0;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: rgba(100, 150, 255, 0.2);
+            color: #ffffff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-link {
+            color: rgba(100, 150, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: rgba(100, 150, 255, 1);
+        }
+
+        /* ============================================
+           SEÇÃO METAS PROFISSIONAIS
+           ============================================ */
+        .goals-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .goal-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid rgba(100, 150, 255, 0.5);
+            color: #c0c0c0;
+        }
+
+        .goal-item::before {
+            content: "🎯 ";
+            margin-right: 0.5rem;
+        }
+
+        /* ============================================
+           SEÇÃO HOBBIES
+           ============================================ */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .hobby-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hobby-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+        }
+
+        .hobby-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ============================================
+           SEÇÃO CONTATO
+           ============================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================
+           SEÇÃO CONTATO - LAYOUT MODERNO
+           ============================================ */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-intro h3 {
+            color: #ffffff;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-available {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-available li {
+            color: #c0c0c0;
+            padding: 0.7rem 0;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-available li:last-child {
+            border-bottom: none;
+        }
+
+        /* Cards de contato principais */
+        .contact-cards-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card-whatsapp::before {
+            background: linear-gradient(180deg, #25d366, #128c7e);
+        }
+
+        .contact-card-email::before {
+            background: linear-gradient(180deg, #6496ff, #4a7dc9);
+        }
+
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-card-icon {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card-whatsapp .contact-card-icon {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+        }
+
+        .contact-card-email .contact-card-icon {
+            background: linear-gradient(135deg, #6496ff, #4a7dc9);
+        }
+
+        .contact-card:hover .contact-card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .contact-card-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .contact-card-info {
+            flex: 1;
+        }
+
+        .contact-card-info h4 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .contact-card-info p {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            word-break: break-all;
+        }
+
+        .contact-card-label {
+            color: #808080;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        /* Links de redes sociais */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: #c0c0c0;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: rgba(100, 150, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(100, 150, 255, 0.1);
+            border-color: rgba(100, 150, 255, 0.3);
+            transform: translateY(-2px);
+            color: #ffffff;
+        }
+
+        .social-link:hover svg {
+            fill: rgba(100, 150, 255, 1);
+            transform: scale(1.1);
+        }
+
+        /* Lado direito - Instagram */
+        .contact-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instagram-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .instagram-section h4 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .qr-code-container {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .qr-code-container img {
+            width: 180px;
+            height: 180px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .instagram-section p {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade da seção de contato */
+        @media (max-width: 968px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-cards-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .contact-card-icon {
+                width: 50px;
+                height: 50px;
+                min-width: 50px;
+            }
+
+            .contact-card-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .social-links {
+                flex-direction: column;
+            }
+
+            .social-link {
+                justify-content: center;
+            }
+        }
+
+        /* ============================================
+           MENSAGEM FINAL
+           ============================================ */
+        .final-message {
+            text-align: center;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #b0b0b0;
+            padding: 3rem 2rem;
+            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        /* ============================================
+           BOTÃO FLUTUANTE WHATSAPP
+           ============================================ */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #20ba5a;
+            transform: scale(1.1);
+            box-shadow: 2px 2px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Tooltip do WhatsApp */
+        .whatsapp-float::before {
+            content: "Fale comigo no WhatsApp";
+            position: absolute;
+            right: 70px;
+            background: rgba(37, 211, 102, 0.95);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            font-size: 14px;
+        }
+
+        .whatsapp-float:hover::before {
+            opacity: 1;
+        }
+
+        /* ============================================
+           BOTÃO VOLTAR AO TOPO
+           ============================================ */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 105px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(100, 150, 255, 0.2);
+            border: 2px solid rgba(100, 150, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: rgba(100, 150, 255, 0.4);
+            border-color: rgba(100, 150, 255, 0.8);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(100, 150, 255, 0.3);
+        }
+
+        .scroll-to-top svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(100, 150, 255, 0.9);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #707070;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           NAVEGAÇÃO MODERNA
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: rgba(100, 150, 255, 0.8);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        nav a.active {
+            color: #ffffff;
+            background: rgba(100, 150, 255, 0.1);
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(100, 150, 255, 0.8), rgba(150, 100, 255, 0.8));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero .description {
+                font-size: 1rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 0.35rem 0.85rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.05rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero .description {
+                font-size: 0.95rem;
+                margin-top: 1rem;
+            }
+
+            .hero-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-badges {
+                gap: 0.4rem;
+                margin: 1rem 0;
+            }
+
+            .hero-badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.7rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 26px;
+            }
+
+            .whatsapp-float::before {
+                display: none;
+            }
+
+            .scroll-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 88px;
+                right: 20px;
+            }
+
+            .scroll-to-top svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.6rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         FUNDO ESPACIAL E ESTRELAS
+         ============================================ -->
+    <div id="stars-background"></div>
+    <div id="stars-layer"></div>
+
+    <!-- ============================================
+         BARRA DE PROGRESSO DE SCROLL
+         ============================================ -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ============================================
+         BOTÃO FLUTUANTE WHATSAPP
+         ============================================ -->
+    <a href="https://wa.me/5543982338000?text=Olá%20Ryan!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar."
+       class="whatsapp-float"
+       target="_blank"
+       aria-label="Fale comigo no WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <!-- ============================================
+         BOTÃO VOLTAR AO TOPO
+         ============================================ -->
+    <div class="scroll-to-top" id="scrollToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
+    </div>
+
+    <!-- ============================================
+         NAVEGAÇÃO
+         ============================================ -->
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#home" class="nav-link">Início</a></li>
+            <li><a href="#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="#formacao" class="nav-link">Formação</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projetos" class="nav-link">Projetos</a></li>
+            <li><a href="#metas" class="nav-link">Metas</a></li>
+            <li><a href="#contato" class="nav-link">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- ============================================
+         SEÇÃO HERO - APRESENTAÇÃO INICIAL
+         Primeira impressão e chamada principal
+         ============================================ -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Ryan Adrian</h1>
+            <p class="subtitle">Desenvolvedor Backend<br>Especialista em Java e Arquitetura de Sistemas</p>
+
+            <!-- Badges de especialidades -->
+            <div class="hero-badges">
+                <span class="hero-badge">Java & Spring Boot</span>
+                <span class="hero-badge">SQL & NoSQL</span>
+                <span class="hero-badge">API REST</span>
+                <span class="hero-badge">Arquitetura de Software</span>
+            </div>
+
+            <p class="description">
+                Profissional focado em desenvolvimento de sistemas robustos, escaláveis e bem estruturados.<br>
+                Apaixonado por backend, arquitetura de software e resolução de problemas complexos através da tecnologia.
+            </p>
+            <div class="hero-buttons">
+                <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+                <a href="#contato" class="btn">Entrar em Contato</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- ============================================
+             SEÇÃO SOBRE MIM
+             Descrição profissional e características
+             ============================================ -->
+        <section id="sobre" class="card">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div>
+                    <img src="docs/images/IMG_20250919_115501_035.webp" alt="Ryan Adrian" class="profile-image">
+                </div>
+                <div class="about-text">
+                    <p>
+                        Ryan Adrian é um desenvolvedor focado em backend, com forte interesse em arquitetura de sistemas,
+                        organização de código e desenvolvimento de soluções robustas.
+                    </p>
+                    <p>
+                        Seu estilo de trabalho é marcado por calma ao lidar com problemas complexos, pensamento analítico,
+                        dedicação ao aprendizado contínuo e persistência na resolução de desafios técnicos.
+                    </p>
+                    <p>
+                        Ryan valoriza código limpo, organização e clareza na construção de sistemas.
+                    </p>
+                    <p style="font-style: italic; color: #a0a0a0; margin-top: 1.5rem;">
+                        "Bons sistemas são construídos com simplicidade, organização e atenção aos detalhes."
+                    </p>
+
+                    <div class="about-highlights">
+                        <div class="highlight-item">Disciplina no desenvolvimento</div>
+                        <div class="highlight-item">Pensamento lógico estruturado</div>
+                        <div class="highlight-item">Foco em evolução constante</div>
+                        <div class="highlight-item">Responsabilidade técnica</div>
+                        <div class="highlight-item">Aprendizado rápido</div>
+                        <div class="highlight-item">Qualidade de software</div>
+                        <div class="highlight-item">Curiosidade tecnológica</div>
+                        <div class="highlight-item">Atenção aos detalhes</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO FORMAÇÃO
+             Educação e estudos continuados
+             ============================================ -->
+        <section id="formacao" class="card">
+            <h2 class="section-title">Formação e Estudos</h2>
+
+            <div class="education-item">
+                <h3>Análise e Desenvolvimento de Sistemas</h3>
+                <p class="institution">Anhanguera de Arapongas - Aproximadamente 2 anos e meio de formação</p>
+                <p style="color: #c0c0c0; margin-bottom: 1rem;">
+                    Durante o curso foram desenvolvidos conhecimentos fundamentais em áreas importantes da engenharia de software:
+                </p>
+                <ul>
+                    <li>Lógica de programação</li>
+                    <li>Estrutura de dados</li>
+                    <li>Modelagem de banco de dados</li>
+                    <li>Desenvolvimento de aplicações</li>
+                    <li>Fundamentos de engenharia de software</li>
+                    <li>Arquitetura básica de sistemas</li>
+                </ul>
+            </div>
+
+            <div class="education-item">
+                <h3>Aprendizado Contínuo</h3>
+                <p style="color: #c0c0c0; margin-bottom: 1rem;">
+                    Além da formação acadêmica, grande parte da evolução técnica vem do aprendizado autodidata
+                    e prática constante, desenvolvendo projetos, explorando novas ferramentas e estudando conceitos
+                    mais avançados de desenvolvimento backend.
+                </p>
+                <p style="color: #b0b0b0; margin-bottom: 0.5rem;"><strong>Foco atual de estudo:</strong></p>
+                <ul>
+                    <li>Aprofundamento em Java e Spring Boot</li>
+                    <li>Modelagem e otimização de bancos de dados</li>
+                    <li>Arquitetura de sistemas</li>
+                    <li>Desenvolvimento de APIs</li>
+                    <li>Boas práticas de desenvolvimento e organização de código</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO SKILLS TÉCNICAS
+             Principais tecnologias e ferramentas
+             ============================================ -->
+        <section id="skills" class="card">
+            <h2 class="section-title">Skills Técnicas</h2>
+            <p class="section-subtitle">Tecnologias e ferramentas que domino</p>
+
+            <div class="skills-grid">
+                <!-- Backend -->
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-item">Java</div>
+                    <div class="skill-item">Spring Boot</div>
+                    <div class="skill-item">TypeScript</div>
+                    <div class="skill-item">Node.js</div>
+                    <div class="skill-item">PHP Laravel</div>
+                </div>
+
+                <!-- Banco de Dados -->
+                <div class="skill-category">
+                    <h3>Banco de Dados</h3>
+                    <div class="skill-item">MySQL</div>
+                    <div class="skill-item">MariaDB</div>
+                    <div class="skill-item">MongoDB</div>
+                    <div class="skill-item">Prisma ORM</div>
+                    <div class="skill-item">JPA/Hibernate</div>
+                </div>
+
+                <!-- Controle de Versão -->
+                <div class="skill-category">
+                    <h3>Controle de Versão</h3>
+                    <div class="skill-item">Git</div>
+                    <div class="skill-item">GitHub</div>
+                    <div class="skill-item">GitLab</div>
+                </div>
+
+                <!-- Ferramentas de API -->
+                <div class="skill-category">
+                    <h3>Ferramentas de API</h3>
+                    <div class="skill-item">Postman</div>
+                    <div class="skill-item">Insomnia</div>
+                    <div class="skill-item">API REST</div>
+                </div>
+
+                <!-- Ambiente e Outras -->
+                <div class="skill-category">
+                    <h3>Ambiente & Outros</h3>
+                    <div class="skill-item">Linux</div>
+                    <div class="skill-item">Angular</div>
+                    <div class="skill-item">POO</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO FERRAMENTAS E CONHECIMENTOS
+             Conhecimentos complementares que demonstram maturidade
+             ============================================ -->
+        <section id="ferramentas" class="card">
+            <h2 class="section-title">Ferramentas e Conhecimentos Complementares</h2>
+            <p class="section-subtitle">Competências que complementam minha expertise técnica</p>
+
+            <div class="tools-grid">
+                <div class="tool-item">Consumo de APIs REST</div>
+                <div class="tool-item">Modelagem de Banco de Dados</div>
+                <div class="tool-item">Escrita de Queries SQL</div>
+                <div class="tool-item">Depuração de Sistemas</div>
+                <div class="tool-item">Análise de Performance</div>
+                <div class="tool-item">Organização de Código</div>
+                <div class="tool-item">Versionamento de Projetos</div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO PROJETOS PESSOAIS
+             Demonstração prática de habilidades
+             ============================================ -->
+        <section id="projetos" class="card">
+            <h2 class="section-title">Projetos Pessoais</h2>
+            <p class="section-subtitle">Sistemas desenvolvidos aplicando tecnologias backend modernas</p>
+
+            <div class="projects-grid">
+                <!-- Projeto 1 - Sistema de Condominios -->
+                <div class="project-card">
+                    <h3>Sistema de Condomínios</h3>
+                    <p class="project-description">
+                        Sistema completo para gestão de condomínios desenvolvido em Java.
+                        Aplica conceitos de POO, arquitetura em camadas e boas práticas de desenvolvimento.
+                    </p>
+                    <p class="project-description">
+                        <strong>Funcionalidades:</strong>
+                    </p>
+                    <ul style="color: #b0b0b0; margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Gestão de moradores e unidades</li>
+                        <li>Controle de áreas comuns</li>
+                        <li>Sistema de reservas</li>
+                        <li>Gerenciamento administrativo</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">POO</span>
+                        <span class="tech-tag">Backend</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/Sistema-de-Condominios" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 - API de Estacionamento -->
+                <div class="project-card">
+                    <h3>API de Estacionamento</h3>
+                    <p class="project-description">
+                        API REST desenvolvida em Java para controle e gerenciamento de estacionamentos.
+                        Implementa operações CRUD e regras de negócio complexas.
+                    </p>
+                    <p class="project-description">
+                        <strong>Recursos:</strong>
+                    </p>
+                    <ul style="color: #b0b0b0; margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Controle de entrada/saída de veículos</li>
+                        <li>Cálculo automático de valores</li>
+                        <li>Gestão de vagas</li>
+                        <li>Endpoints RESTful bem estruturados</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">API REST</span>
+                        <span class="tech-tag">Spring</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/Estacionamento-API-java" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 3 - Backend TypeScript -->
+                <div class="project-card">
+                    <h3>Backend com TypeScript & Prisma</h3>
+                    <p class="project-description">
+                        Aplicação backend desenvolvida em TypeScript utilizando Prisma ORM.
+                        Demonstra versatilidade em diferentes tecnologias backend.
+                    </p>
+                    <p class="project-description">
+                        <strong>Tecnologias aplicadas:</strong>
+                    </p>
+                    <ul style="color: #b0b0b0; margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>TypeScript para tipagem forte</li>
+                        <li>Prisma como ORM moderno</li>
+                        <li>Arquitetura backend estruturada</li>
+                        <li>Boas práticas de código</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Prisma</span>
+                        <span class="tech-tag">Node.js</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/BackEndTS" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 4 - Spring Boot Estudos -->
+                <div class="project-card">
+                    <h3>Spring Boot - Estudos Avançados</h3>
+                    <p class="project-description">
+                        Repositório dedicado ao aprendizado e prática de Spring Boot.
+                        Contém implementações de diversos conceitos e funcionalidades do framework.
+                    </p>
+                    <p class="project-description">
+                        <strong>Conteúdo:</strong>
+                    </p>
+                    <ul style="color: #b0b0b0; margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>APIs RESTful</li>
+                        <li>Integração com bancos de dados</li>
+                        <li>Dependency Injection</li>
+                        <li>Segurança e autenticação</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">JPA</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/Spring-Boot-Estudos" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 5 - TODO API -->
+                <div class="project-card">
+                    <h3>TODO API - TypeScript</h3>
+                    <p class="project-description">
+                        API de gerenciamento de tarefas desenvolvida durante estudos na Unopar.
+                        Projeto acadêmico que aplica conceitos de API REST.
+                    </p>
+                    <p class="project-description">
+                        <strong>Características:</strong>
+                    </p>
+                    <ul style="color: #b0b0b0; margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>CRUD completo de tarefas</li>
+                        <li>Validações de dados</li>
+                        <li>Organização de código limpo</li>
+                        <li>Endpoints bem documentados</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">API REST</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/todo-api-unopar" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 6 - Slime Commerce -->
+                <div class="project-card">
+                    <h3>Slime Commerce</h3>
+                    <p class="project-description">
+                        Projeto de e-commerce colaborativo desenvolvido com auxílio de IA.
+                        Demonstra capacidade de trabalho em equipe e uso de ferramentas modernas.
+                    </p>
+                    <p class="project-description">
+                        <strong>Destaques:</strong>
+                    </p>
+                    <ul style="color: #b0b0b0; margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Desenvolvimento colaborativo</li>
+                        <li>Integração de IA no desenvolvimento</li>
+                        <li>Sistema de e-commerce completo</li>
+                        <li>Projeto em equipe</li>
+                    </ul>
+                    <div class="project-tech">
+                        <span class="tech-tag">Desenvolvimento Colaborativo</span>
+                        <span class="tech-tag">E-commerce</span>
+                        <span class="tech-tag">IA</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/slimecomerce" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 7 - Estudos Java -->
+                <div class="project-card">
+                    <h3>Estudos Java - Fundamentos</h3>
+                    <p class="project-description">
+                        Repositório de estudos focado em fundamentos e conceitos avançados de Java.
+                        Contém exercícios, implementações e experimentações.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Fundamentos</span>
+                        <span class="tech-tag">POO</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/Estudos-Java" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 8 - PHP Laravel -->
+                <div class="project-card">
+                    <h3>Estudos PHP & Laravel</h3>
+                    <p class="project-description">
+                        Exploração do framework Laravel e desenvolvimento backend em PHP.
+                        Demonstra versatilidade em diferentes linguagens e frameworks.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">Backend</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/1Kibe/PHP-Laravel" target="_blank" class="project-link">Ver Código →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Link para ver mais projetos no GitHub -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="https://github.com/1Kibe?tab=repositories" target="_blank" class="btn btn-primary">
+                    Ver Todos os Projetos no GitHub →
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO METAS PROFISSIONAIS
+             Visão de futuro e objetivos
+             ============================================ -->
+        <section id="metas" class="card">
+            <h2 class="section-title">Metas Profissionais</h2>
+            <p class="section-subtitle">Objetivos que guiam minha evolução como desenvolvedor</p>
+
+            <ul class="goals-list">
+                <li class="goal-item">Aprofundar conhecimento em arquitetura de software</li>
+                <li class="goal-item">Desenvolver sistemas cada vez mais escaláveis</li>
+                <li class="goal-item">Aprimorar habilidades em backend</li>
+                <li class="goal-item">Contribuir com projetos relevantes</li>
+                <li class="goal-item">Evoluir como engenheiro de software</li>
+                <li class="goal-item">Explorar microsserviços e sistemas distribuídos</li>
+                <li class="goal-item">Otimizar performance de aplicações</li>
+            </ul>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO HOBBIES
+             Interesses pessoais que humanizam o perfil
+             ============================================ -->
+        <section id="hobbies" class="card">
+            <h2 class="section-title">Hobbies e Interesses</h2>
+            <p class="section-subtitle">Atividades que me inspiram e complementam minha jornada</p>
+
+            <div class="hobbies-grid">
+                <div class="hobby-item">
+                    <div class="hobby-icon">💻</div>
+                    <p>Estudar tecnologia</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon">🧩</div>
+                    <p>Resolver problemas de programação</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon">🔧</div>
+                    <p>Explorar novas ferramentas</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon">📚</div>
+                    <p>Aprendizado contínuo</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon">⚡</div>
+                    <p>Experimentação com projetos pessoais</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SEÇÃO CONTATO
+             Informações para conexão profissional
+             ============================================ -->
+        <section id="contato" class="card">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="section-subtitle">Vamos conversar sobre oportunidades, projetos ou tecnologia</p>
+
+            <!-- Container principal de contato -->
+            <div class="contact-wrapper">
+                <!-- Lado esquerdo - Informações principais -->
+                <div class="contact-main">
+                    <div class="contact-intro">
+                        <h3>Estou disponível para:</h3>
+                        <ul class="contact-available">
+                            <li>💼 Oportunidades de trabalho</li>
+                            <li>🤝 Colaborações em projetos</li>
+                            <li>💡 Discussões sobre tecnologia</li>
+                            <li>🎯 Networking profissional</li>
+                        </ul>
+                    </div>
+
+                    <!-- Cards de contato lado a lado -->
+                    <div class="contact-cards-row">
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/5543982338000?text=Olá%20Ryan!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar."
+                           target="_blank"
+                           class="contact-card contact-card-whatsapp">
+                            <div class="contact-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-card-info">
+                                <h4>WhatsApp</h4>
+                                <p>(43) 98233-8000</p>
+                                <span class="contact-card-label">Resposta rápida</span>
+                            </div>
+                        </a>
+
+                        <!-- Email -->
+                        <a href="mailto:ryanadrianpra2022@gmail.com"
+                           class="contact-card contact-card-email">
+                            <div class="contact-card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-card-info">
+                                <h4>Email</h4>
+                                <p>ryanadrianpra2022@gmail.com</p>
+                                <span class="contact-card-label">Contato profissional</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Redes Sociais -->
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ryan-adrian-919b1930b" target="_blank" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                            <span>LinkedIn</span>
+                        </a>
+
+                        <a href="https://github.com/1Kibe" target="_blank" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                            </svg>
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lado direito - Instagram QR Code -->
+                <div class="contact-side">
+                    <div class="instagram-section">
+                        <h4>Me siga no Instagram</h4>
+                        <div class="qr-code-container">
+                            <img src="docs/images/intaQR.jpeg" alt="Instagram QR Code">
+                        </div>
+                        <p>Escaneie para conectar</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             MENSAGEM FINAL
+             Citação que representa a filosofia profissional
+             ============================================ -->
+        <div class="final-message">
+            "Sistemas bem construídos nascem da combinação entre lógica, organização e dedicação ao detalhe."
+        </div>
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         Rodapé com informações adicionais
+         ============================================ -->
+    <footer>
+        <p>&copy; 2026 Ryan Adrian - Desenvolvedor Backend</p>
+        <p>Feito com dedicação e atenção aos detalhes</p>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT - EFEITOS E INTERATIVIDADE
+         ============================================ -->
+    <script>
+        // ============================================
+        // GERAÇÃO DO CAMPO DE ESTRELAS GALÁTICO
+        // Cria estrelas de diferentes tamanhos e tipos
+        // Estrelas são criadas na camada separada para parallax
+        // ============================================
+        function createStars() {
+            const starsLayer = document.getElementById('stars-layer');
+
+            // Estrelas pequenas (maioria)
+            const smallStars = 150;
+            for (let i = 0; i < smallStars; i++) {
+                createStar(starsLayer, 'small');
+            }
+
+            // Estrelas médias
+            const mediumStars = 50;
+            for (let i = 0; i < mediumStars; i++) {
+                createStar(starsLayer, 'medium');
+            }
+
+            // Estrelas grandes (raras)
+            const largeStars = 20;
+            for (let i = 0; i < largeStars; i++) {
+                createStar(starsLayer, 'large');
+            }
+
+            // Estrelas brilhantes com efeito especial
+            const brightStars = 15;
+            for (let i = 0; i < brightStars; i++) {
+                createStar(starsLayer, 'bright');
+            }
+        }
+
+        function createStar(container, type) {
+            const star = document.createElement('div');
+            star.className = `star ${type}`;
+
+            // Posição aleatória
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+
+            // Opacidade aleatória
+            const opacity = 0.3 + Math.random() * 0.7;
+            star.style.opacity = opacity;
+
+            // Delay aleatório para animação
+            star.style.animationDelay = Math.random() * 3 + 's';
+
+            // Duração aleatória para variação
+            const duration = 2 + Math.random() * 4;
+            star.style.animationDuration = duration + 's';
+
+            container.appendChild(star);
+        }
+
+        // ============================================
+        // SCROLL SUAVE PARA NAVEGAÇÃO
+        // Melhora a experiência de navegação entre seções
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // BARRA DE PROGRESSO DE SCROLL
+        // Mostra visualmente o progresso da página
+        // ============================================
+        function updateScrollProgress() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+            scrollProgress.style.width = scrollPercentage + '%';
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+
+        // ============================================
+        // EFEITO DE NAVEGAÇÃO AO SCROLL
+        // Adiciona classe quando a página rolar
+        // ============================================
+        function handleNavScroll() {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', handleNavScroll);
+
+        // ============================================
+        // ANIMAÇÃO DE ENTRADA DOS ELEMENTOS
+        // Cards aparecem suavemente ao fazer scroll
+        // ============================================
+        function animateOnScroll() {
+            const cards = document.querySelectorAll('.card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // ============================================
+        // EFEITO PARALLAX SUAVE NO FUNDO
+        // Apenas as estrelas se movem, o fundo fica fixo
+        // ============================================
+        function parallaxEffect() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const starsLayer = document.getElementById('stars-layer');
+                // Parallax suave apenas nas estrelas
+                starsLayer.style.transform = `translateY(${scrolled * 0.15}px)`;
+            });
+        }
+
+        // ============================================
+        // INICIALIZAÇÃO
+        // Executa todas as funções quando a página carrega
+        // ============================================
+        window.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            animateOnScroll();
+            parallaxEffect();
+            animateNumbers();
+
+            console.log('%c👨‍💻 Landing Page - Ryan Adrian', 'color: #6496ff; font-size: 20px; font-weight: bold;');
+            console.log('%cDesenvolvedor Backend | Java & Spring Boot', 'color: #b0b0b0; font-size: 14px;');
+        });
+
+        // ============================================
+        // MOSTRAR/ESCONDER BOTÃO VOLTAR AO TOPO
+        // Aparece após rolar 300px
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const scrollToTop = document.getElementById('scrollToTop');
+            if (window.pageYOffset > 300) {
+                scrollToTop.classList.add('show');
+            } else {
+                scrollToTop.classList.remove('show');
+            }
+        });
+
+        // ============================================
+        // DESTAQUE DA NAVEGAÇÃO ATIVA
+        // Marca a seção atual no menu de navegação
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+            const scrollPosition = window.pageYOffset + 200;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ============================================
+        // CONTADOR ANIMADO (OPCIONAL)
+        // Anima números quando entram na viewport
+        // ============================================
+        function animateNumbers() {
+            const counters = document.querySelectorAll('[data-count]');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const target = parseInt(element.getAttribute('data-count'));
+                        const duration = 2000;
+                        const step = target / (duration / 16);
+                        let current = 0;
+
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= target) {
+                                element.textContent = target;
+                                clearInterval(timer);
+                            } else {
+                                element.textContent = Math.floor(current);
+                            }
+                        }, 16);
+
+                        observer.unobserve(element);
+                    }
+                });
+            });
+
+            counters.forEach(counter => observer.observe(counter));
+        }
+    </script>
+</body>
+</html>
+
+
+
+
