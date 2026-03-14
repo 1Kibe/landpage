@@ -7,9 +7,7 @@ Landing page profissional com tema espacial, apresentando meu trabalho como **De
 ## 🚀 Acesso Rápido
 
 ### 🌐 Site Online
-- **Versão 1 (Espacial)**: https://1kibe.github.io/landpage/
-- **Versão 2 (Tech/Cyberpunk)**: https://1kibe.github.io/landpage/index2.html
-- **Versão 3 (Retro Gaming)**: https://1kibe.github.io/landpage/index3.html
+- **Landing Page**: https://1kibe.github.io/landpage/
 
 ### ⚡ Deploy Rápido
 ```bash
@@ -26,8 +24,6 @@ git push
 ```
 RyanLandPage/
 ├── index.html          # Landing page principal (Tema Espacial)
-├── index2.html         # Versão Tech/Cyberpunk
-├── index3.html         # Versão Retro Gaming
 ├── .github/
 │   └── workflows/
 │       └── static.yml  # Deploy automático GitHub Pages
@@ -36,6 +32,7 @@ RyanLandPage/
 │   └── images/
 │       ├── IMG_20250919_115501_035.webp  # Foto pessoal
 │       └── intaQR.jpeg                   # QR Code Instagram
+├── GUIA-COMPLETO.md    # Documentação completa
 └── README.md           # Este arquivo
 ```
 
@@ -47,7 +44,9 @@ RyanLandPage/
 - 🌟 **235 estrelas animadas** com diferentes tamanhos e opacidades
 - 🌌 **Galáxia rotativa** com nebulosas em roxo e azul
 - 💫 **Partículas flutuantes** com efeito parallax
-- 🎭 **3 versões de design** para diferentes estilos
+- 🎨 **Cards com efeitos refinados** (light shine, sombras multicamadas)
+- 💎 **Títulos com gradiente metálico** e underline animado
+- ✨ **Tags de habilidades** com micro-animações e efeitos neon
 - 📱 **100% responsivo** - funciona em todos os dispositivos
 
 ### ⚡ Performance
@@ -168,21 +167,6 @@ http-server
 
 ## 🎨 Personalização
 
-### Trocar Versão Principal
-Para usar outra versão como principal:
-
-```bash
-# Backup da versão atual
-mv index.html index-espacial.html
-
-# Usar versão 2 como principal
-cp index2.html index.html
-
-# Commit
-git add .
-git commit -m "🎨 Mudança para versão Tech/Cyberpunk"
-git push
-```
 
 ### Editar Informações
 Todos os arquivos são **auto-contidos** e **bem documentados**. Basta abrir o HTML e procurar pelos comentários:
@@ -227,25 +211,18 @@ Você também pode fazer deploy manualmente:
 
 ---
 
-## 📊 Estrutura das Páginas
+## 📊 Estrutura da Página
 
-### Index.html (Espacial) 🌌
-- Fundo: Galáxia rotativa + Estrelas animadas
-- Tema: Explorador espacial
-- Cores: Roxo (#8b5cf6) + Azul (#3b82f6)
-- Efeito especial: Parallax nas estrelas
-
-### Index2.html (Tech/Cyberpunk) 💚
-- Fundo: Grid tecnológico + Partículas
-- Tema: Desenvolvedor futurista
-- Cores: Verde neon + Ciano
-- Efeito especial: Glitch text
-
-### Index3.html (Retro Gaming) 🎮
-- Fundo: Pixel art + Snake game
-- Tema: Desenvolvedor retrô
-- Cores: Amarelo + Vermelho + Verde
-- Efeito especial: Jogo da cobrinha interativo
+### Landing Page (Espacial) 🌌
+- **Fundo**: Galáxia rotativa + 235 estrelas animadas
+- **Tema**: Explorador espacial
+- **Cores principais**: Roxo (#8b5cf6) + Azul (#3b82f6)
+- **Efeitos especiais**: 
+  - Parallax nas estrelas
+  - Cards com light shine animation
+  - Títulos com gradiente metálico
+  - Tags de habilidades com micro-animações neon
+  - Footer com blur effect
 
 ---
 

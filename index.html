@@ -86,23 +86,27 @@
             animation: nebulaSlow 60s ease-in-out infinite alternate;
         }
 
-        /* Galáxia espiral */
         #stars-background::after {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 150%;
-            height: 150%;
+            width: 200%;
+            height: 200%;
             background:
                 radial-gradient(ellipse at center,
                     transparent 0%,
-                    rgba(100, 150, 255, 0.015) 30%,
-                    rgba(150, 100, 255, 0.015) 50%,
-                    transparent 70%
+                    rgba(100, 150, 255, 0.025) 25%,
+                    rgba(150, 100, 255, 0.03) 45%,
+                    rgba(100, 100, 255, 0.02) 60%,
+                    transparent 75%
+                ),
+                radial-gradient(circle at 35% 45%,
+                    rgba(120, 140, 255, 0.025) 0%,
+                    transparent 35%
                 );
             transform: translate(-50%, -50%) rotate(45deg);
-            animation: galaxyRotate 120s linear infinite;
+            animation: galaxyRotate 180s linear infinite;
         }
 
         @keyframes nebulaSlow {
@@ -188,15 +192,16 @@
 
         /* Estilo base para todos os cards */
         .card {
-            background: rgba(60, 60, 60, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            background: rgba(60, 60, 60, 0.18);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
             padding: 2.5rem;
-            margin: 2rem 0;
-            transition: all 0.3s ease;
+            margin-bottom: 3rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
 
         .card::before {
@@ -208,20 +213,42 @@
             height: 100%;
             background: linear-gradient(90deg,
                 transparent,
-                rgba(100, 150, 255, 0.05),
+                rgba(100, 150, 255, 0.1),
                 transparent
             );
-            transition: left 0.5s ease;
+            transition: left 0.6s ease;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(100, 150, 255, 0.4),
+                transparent
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .card:hover::before {
             left: 100%;
         }
 
+        .card:hover::after {
+            opacity: 1;
+        }
+
         .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            border-color: rgba(100, 150, 255, 0.25);
+            box-shadow:
+                0 15px 50px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(100, 150, 255, 0.15);
         }
 
         /* Animação de entrada para os cards */
@@ -869,10 +896,6 @@
         }
 
         .contact-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .contact-card-icon {
@@ -1170,9 +1193,37 @@
            ============================================ */
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #707070;
+            padding: 2.5rem 2rem;
+            color: #909090;
             font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 3rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(100, 150, 255, 0.3),
+                transparent
+            );
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        footer p:hover {
+            color: #c0c0c0;
         }
 
         /* ============================================
@@ -1400,6 +1451,52 @@
             .card {
                 padding: 1.5rem;
             }
+        }
+
+        /* ============================================
+           MELHORIAS NAS TAGS DE HABILIDADES
+           Micro-animações e estilo aprimorado
+           ============================================ */
+        .skill-tag {
+            background: rgba(100, 150, 255, 0.15);
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: #d0d0d0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.15),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+
+        .skill-tag:hover {
+            background: rgba(100, 150, 255, 0.28);
+            border-color: rgba(100, 150, 255, 0.5);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow:
+                0 6px 20px rgba(100, 150, 255, 0.25),
+                0 0 15px rgba(100, 150, 255, 0.2);
+            color: #ffffff;
         }
     </style>
 </head>
@@ -1996,7 +2093,7 @@
                         </a>
 
                         <!-- Email -->
-                        <a href="mailto:ryanadrianpra2022@gmail.com"
+                        <a href="mailto:ryanadrianprado2022@gmail.com"
                            class="contact-card contact-card-email">
                             <div class="contact-card-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
@@ -2005,7 +2102,7 @@
                             </div>
                             <div class="contact-card-info">
                                 <h4>Email</h4>
-                                <p>ryanadrianpra2022@gmail.com</p>
+                                <p>ryanadrianprado2022@gmail.com</p>
                                 <span class="contact-card-label">Contato profissional</span>
                             </div>
                         </a>
@@ -2298,7 +2395,6 @@
     </script>
 </body>
 </html>
-
 
 
 
