@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ryan Adrian - Desenvolvedor Backend | Java & Spring Boot</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+  <meta name="keywords" content="desenvolvedor, backend, Java, Spring Boot, API REST, desenvolvedor Java, portfolio">
+  <meta name="author" content="Ryan Adrian">
+  <meta name="description" content="Portfolio de Ryan Adrian. Desenvolvedor Backend especializado em Java, Spring Boot e Arquitetura de Sistemas.">
+  <meta name="theme-color" content="#3ddc84">
+  <meta itemprop="name" content="Ryan Adrian | Desenvolvedor Backend | Java & Spring Boot">
+
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      text-rendering: optimizeLegibility;
+      font-size: 100%;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #d7effe;
+    }
+
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      background: #d7effe;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3ddc84;
+    }
+
+    ::selection {
+      color: inherit;
+      background: rgba(61, 220, 132, 0.2);
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .col-2 { width: 16.66%; }
+    .col-3 { width: 25%; }
+    .col-4 { width: 33.33%; }
+    .col-5 { width: 41.66%; }
+    .col-6 { width: 50%; }
+    .col-7 { width: 58.33%; }
+    .col-9 { width: 75%; }
+    .col-10 { width: 83.33%; margin: auto; }
+    .col-12 { width: 100%; }
+
+    p, h1, h5 {
+      cursor: default;
+    }
+
+    p .row {
+      margin-bottom: 4px;
+    }
+
+    h1 {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      font-size: 6.5vw;
+      color: #000000;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    del {
+      text-decoration: none;
+      position: relative;
+    }
+
+    del::after {
+      content: '';
+      position: absolute;
+      height: 10px;
+      width: 100%;
+      background: #2c2a2a;
+      top: 50%;
+      transform: translate(0, -50%);
+      left: 0;
+    }
+
+    span {
+      display: block;
+      font-family: inherit;
+    }
+
+    p {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-weight: 300;
+      font-size: 1.171vw;
+      color: #000000;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-weight: 400;
+      font-size: .83333vw;
+      color: #000000;
+      position: relative;
+      transition: color .4s;
+    }
+
+    a:hover {
+      color: #2ecc71;
+    }
+
+    .row {
+      overflow: hidden;
+      font-size: inherit;
+    }
+
+    .row>span,
+    .imgrev::before {
+      transition: transform .8s cubic-bezier(0.215, 0.61, 0.355, 1);
+      transition-delay: .2s;
+    }
+
+    .row>span {
+      font-family: inherit;
+    }
+
+    .row>span[data-emergence=hidden] {
+      transform: translate(0, 100%);
+    }
+
+    .row>span[data-emergence=visible] {
+      transform: translate(0, 0);
+    }
+
+    hr {
+      height: 10px;
+      border: none;
+      transition: box-shadow 1.9s cubic-bezier(0.215, 0.61, 0.355, 1);
+      transition-delay: .5s;
+      margin: 0 1.8vw;
+      position: relative;
+      display: block;
+    }
+
+    hr::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      background: #000000;
+      transition: 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+      transition-delay: .8s;
+    }
+
+    hr[data-emergence=hidden]::after {
+      width: 0;
+    }
+
+    hr[data-emergence=visible]::after {
+      width: 100%;
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+    }
+
+    .jus {
+      justify-content: space-between;
+    }
+
+    .ali {
+      align-items: flex-start;
+    }
+
+    .imgrev {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .imgrev img {
+      width: 100%;
+    }
+
+    .imgrev::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: #d7effe;
+      z-index: 4;
+      transition: .8s;
+      transition-delay: .5s;
+    }
+
+    .imgrev[data-emergence=hidden]::before {
+      height: 100%;
+    }
+
+    .imgrev[data-emergence=visible]::before {
+      height: 0;
+    }
+
+    /* ============================================
+       RESIZE WARNING OVERLAY
+       ============================================ */
+    .scr {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f0f0f0;
+      display: none;
+      text-align: center;
+      padding-top: 25vh;
+      z-index: 100;
+    }
+
+    .scr h1,
+    .scr p,
+    .scr a {
+      color: #19191b;
+      text-align: center;
+      display: block;
+    }
+
+    .scr h1 {
+      font-size: 3vw;
+      justify-content: center;
+    }
+
+    .scr p,
+    .scr a {
+      font-size: 1.5vw;
+      line-height: 2vw;
+      padding: 20px 0;
+    }
+
+    .scr a {
+      text-decoration: underline;
+      padding-top: 50px;
+    }
+
+    @media only screen and (max-width: 1000px) {
+      body {
+        overflow: hidden;
+      }
+      .scr {
+        display: block;
+      }
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2.5vh calc((100% - 83.33%) / 2);
+      padding-bottom: 1.5vh;
+      border-bottom: 1px solid rgba(200, 200, 200, 0.1);
+      z-index: 8;
+      background: #d7effe;
+    }
+
+    nav hr,
+    .nav_left hr {
+      height: 2px;
+      margin: 0 10px;
+    }
+
+    nav span,
+    nav a {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+      color: #000000;
+    }
+
+    nav div>span,
+    nav a {
+      font-size: 11px;
+      line-height: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #mbtn,
+    #mbtn_side h5 {
+      cursor: pointer;
+    }
+
+    #mbtn hr {
+      width: 30px;
+      height: 2px;
+      margin: 7px 0;
+      background: transparent;
+      transition: .3s;
+      transition-delay: .1s;
+    }
+
+    #mbtn hr::after {
+      display: none;
+    }
+
+    .mbtn-hidden hr {
+      box-shadow: inset 0px 0 #000000;
+    }
+
+    .mbtn-visible hr {
+      box-shadow: inset 30px 0 #000000;
+    }
+
+    .nav_left {
+      position: fixed;
+      top: 50%;
+      left: 30px;
+      transform: translate(-40.5%, -50%) rotate(90deg);
+      white-space: nowrap;
+      opacity: 0;
+      z-index: 1;
+      transition: .4s;
+    }
+
+    .nav_left h5,
+    #mbtn_side h5 {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #000000;
+      text-transform: uppercase;
+    }
+
+    #mbtn_side h5:hover {
+      color: #2ecc71;
+    }
+
+    #mbtn_side {
+      position: fixed;
+      top: 22%;
+      right: 30px;
+      transform: translate(0, -50%) rotate(90deg);
+      z-index: 1;
+      opacity: 0;
+      transition: .4s;
+      cursor: pointer;
+    }
+
+    /* ============================================
+       MENU OVERLAY
+       ============================================ */
+    #mnu {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: -200%;
+      left: 0;
+      z-index: 10;
+      padding: 20vh 0 0 0;
+      transition: top .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    #mnu.mnu-vis {
+      top: 0;
+    }
+
+    #mnu .row>span {
+      transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    #mnu::after {
+      content: "";
+      width: 100%;
+      position: absolute;
+      background: #3ddc84;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      transition: .4s cubic-bezier(0.215, 0.61, 0.355, 1);
+      height: 0;
+    }
+
+    #mnu.mnu-vis::after {
+      height: 100%;
+    }
+
+    #cbtn {
+      position: absolute;
+      left: 50%;
+      top: 8vh;
+      transform: translate(-50%, 0);
+      height: 2px;
+      cursor: pointer;
+      padding: 10px 5px;
+      z-index: 11;
+    }
+
+    #cbtn hr {
+      margin: 0;
+      height: 2px;
+      width: 20px;
+      transition: .3s;
+      border: inherit;
+      background: transparent;
+    }
+
+    #cbtn hr::after {
+      display: none;
+    }
+
+    .cbtn-visible hr {
+      box-shadow: inset 22px 0 #2c2a2a;
+    }
+
+    .cbtn-hidden hr {
+      box-shadow: inset 0px 0 #2c2a2a;
+    }
+
+    #mnu a {
+      transition: .2s;
+    }
+
+    .mnub {
+      margin-top: 5vh;
+    }
+
+    .me {
+      align-items: flex-start;
+    }
+
+    .me a {
+      font-size: 25px;
+      color: #2c2a2a;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .me hr {
+      height: 2px;
+    }
+
+    .me p {
+      font-size: 13px;
+      color: #2c2a2a;
+    }
+
+    .ms {
+      transform: translate(-6vw, 0);
+    }
+
+    .social a {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 1.066em;
+      line-height: 1.154em;
+      display: block;
+      padding: 1px 0;
+      transition-delay: 0s;
+      color: #2c2a2a;
+    }
+
+    .social a:hover {
+      color: #000000;
+    }
+
+    #mnu h1,
+    .ms a,
+    #mnu hr::after {
+      color: #2c2a2a;
+    }
+
+    #mnu hr::after {
+      background: #2c2a2a;
+      transition: .5s;
+      transition-delay: .1s;
+    }
+
+    #mnu h1 a {
+      color: inherit;
+      font-size: inherit;
+      font-family: inherit;
+    }
+
+    /* ============================================
+       MAIN SCROLL CONTAINER
+       ============================================ */
+    [data-scroll-content] {
+      padding-top: 9vw;
+      padding-bottom: 5.5vw;
+    }
+
+    /* ============================================
+       BANNER
+       ============================================ */
+    .bnr {
+      position: relative;
+      background: #d7effe;
+      width: 100%;
+    }
+
+    .tb {
+      width: 180vw;
+      font-size: 7.613vw;
+      text-transform: uppercase;
+      line-height: 0.9;
+    }
+
+    .sleft {
+      margin-left: 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .sright {
+      margin-left: -2vw;
+      position: relative;
+      z-index: 5;
+    }
+
+    .bl {
+      transform: translate(0, -5.8vh);
+    }
+
+    .bi {
+      width: 49vw;
+      height: auto;
+    }
+
+    .ba {
+      position: absolute;
+      bottom: 28vh;
+      right: 14vh;
+      width: 70px;
+    }
+
+    .ba img {
+      width: 100%;
+    }
+
+    .bt {
+      padding-left: 10vw;
+      transform: translate(0, 70%);
+      max-width: 450px;
+    }
+
+    .bt p {
+      font-size: 1.02em;
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       ABOUT SECTION
+       ============================================ */
+    .abt hr::after {
+      background: #b1defa;
+    }
+
+    .abt h1 hr::after {
+      background: #000000;
+    }
+
+    .abt>div hr {
+      width: 100%;
+      margin: 0;
+      height: 2px;
+    }
+
+    .abt>div hr::after {
+      background: #b1defa;
+    }
+
+    .intro {
+      padding: 5vw 0;
+    }
+
+    .intro>div {
+      flex: 1;
+    }
+
+    .intro>div>span {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #000000;
+    }
+
+    .intro div:last-of-type {
+      transform: translate(-8vw, 0);
+    }
+
+    .intro .highlight-role {
+      font-size: 25px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+    }
+
+    .intro .highlight-role a {
+      font-size: 25px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* ============================================
+       EXPERIENCE & EDUCATION
+       ============================================ */
+    .section-block {
+      padding: 2vw 0 5vw 0;
+    }
+
+    .section-block .exp-list {
+      padding: 3vw 0;
+    }
+
+    .exp-list hr.divider {
+      width: 100%;
+      height: 2px;
+      margin: 0;
+    }
+
+    .exp-item {
+      padding: 2vw 0;
+    }
+
+    .exp-item .company {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 1.8em;
+      color: #19191b;
+    }
+
+    .exp-item .role {
+      color: #19191b;
+      margin-top: 5px;
+    }
+
+    .exp-item .role span {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+    }
+
+    .exp-item .desc {
+      margin-top: 15px;
+      color: #333;
+    }
+
+    .exp-item .desc span {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .exp-item .desc .row {
+      margin-bottom: 2px;
+    }
+
+    /* ============================================
+       SELECTED WORK
+       ============================================ */
+    .sw {
+      margin: 0 auto 18vw auto;
+    }
+
+    .sw,
+    .con {
+      margin: 5vw auto 20vh auto;
+    }
+
+    .swdes span>span {
+      text-align: right;
+      transition-delay: .9s;
+      font-size: 15px;
+      text-transform: none;
+      font-weight: normal;
+    }
+
+    .scol {
+      padding: 20vh 8vw 5vh 8vw;
+    }
+
+    .sbot {
+      margin-top: -20vh;
+    }
+
+    .w-margin {
+      margin: 0 0 28vh 0;
+    }
+
+    .w p {
+      font-size: 1.02em;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 600;
+      padding: 15px 0 2px 0;
+    }
+
+    .w>span {
+      font-size: 12px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      opacity: .5;
+      color: #000000;
+    }
+
+    .w>a>div img {
+      filter: grayscale(1);
+      transition: .4s;
+      border-radius: 4px;
+    }
+
+    .w>a>div img:hover {
+      filter: grayscale(0);
+    }
+
+    /* Project placeholder images */
+    .project-placeholder {
+      background: #19191b;
+      color: #fff;
+      width: 100%;
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5vw;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+      border-radius: 4px;
+      transition: .4s;
+    }
+
+    .w>a>div .project-placeholder {
+      filter: grayscale(1);
+      transition: .4s;
+    }
+
+    .w>a:hover>div .project-placeholder {
+      filter: grayscale(0);
+    }
+
+    /* ============================================
+       CONTACT
+       ============================================ */
+    .con {
+      position: relative;
+      margin-bottom: 0;
+    }
+
+    .con * {
+      transition-delay: .6s;
+      transition-property: transform;
+    }
+
+    .cs {
+      width: 52.33%;
+      margin-left: 25.3%;
+      align-items: center;
+    }
+
+    .social a {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 1.066em;
+      line-height: 1.154em;
+      display: block;
+      padding: 1px 0;
+      transition: .2s;
+    }
+
+    .ctext {
+      transform: translate(0, 1.8vh);
+    }
+
+    .ctext p {
+      white-space: nowrap;
+    }
+
+    .ctext>a {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-weight: 600;
+      text-decoration: underline;
+      transform: translate(0, 10vh);
+      display: block;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .ctext>a:hover {
+      color: #2ecc71;
+    }
+
+    .social p {
+      font-size: 16px;
+      opacity: .5;
+    }
+
+    .c-small {
+      font-size: 12px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      transform: translate(0, 25vh);
+      color: #000000;
+      opacity: .5;
+    }
+
+    .cs .imgrev {
+      width: 30vw;
+      margin-left: -25vw;
+      margin-top: -4.5vh;
+    }
+
+    .contact-gif {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #19191b;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 3vw;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 8vw;
+      }
+
+      .tb {
+        font-size: 10vw;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      a {
+        font-size: 12px;
+      }
+
+      .bt {
+        padding-left: 4vw;
+        transform: translate(0, 50%);
+      }
+
+      .bi {
+        width: 70vw;
+      }
+
+      .ba {
+        bottom: 20vh;
+        right: 5vh;
+        width: 50px;
+      }
+
+      .intro {
+        flex-direction: column;
+      }
+
+      .intro div:last-of-type {
+        transform: translate(0, 2vw);
+      }
+
+      .intro .highlight-role,
+      .intro .highlight-role a {
+        font-size: 18px;
+      }
+
+      .scol {
+        padding: 10vh 4vw 3vh 4vw;
+      }
+
+      .sbot {
+        margin-top: 0;
+      }
+
+      .w-margin {
+        margin: 0 0 10vh 0;
+      }
+
+      .cs {
+        width: 100%;
+        margin-left: 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cs .imgrev {
+        width: 60vw;
+        margin-left: 0;
+        margin-top: 5vh;
+      }
+
+      .ctext {
+        transform: none;
+      }
+
+      .ctext>a {
+        font-size: 18px;
+        transform: translate(0, 5vh);
+      }
+
+      .c-small {
+        transform: translate(0, 10vh);
+      }
+
+      .con .col-12 {
+        justify-content: flex-start;
+      }
+
+      .exp-item .company {
+        font-size: 1.3em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ============================================
+       RESIZE WARNING
+       ============================================ -->
+  <div class="scr">
+    <h1>REDIMENSIONE SEU<br>NAVEGADOR</h1>
+    <p>Se estiver em um tablet ou dispositivo menor,<br>acesse a versão mobile.</p>
+    <a href="index.html">Versão Mobile / Alternativa</a>
+  </div>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav class="flex col-12">
+    <div>
+      <span class="flex">
+        <hr data-emergence="hidden" style="width: 4vw;">
+        RYAN ADRIAN
+      </span>
+    </div>
+    <div>
+      <span class="flex">
+        <a href="#projetos">PROJETOS</a>
+      </span>
+    </div>
+    <div id="mbtn" class="mbtn-visible" onclick="toggleMenu()">
+      <hr>
+      <hr style="transition-delay: .3s;">
+    </div>
+  </nav>
+
+  <div id="nl" class="nav_left">
+    <h5 class="flex">
+      RYAN ADRIAN
+    </h5>
+  </div>
+
+  <div id="mbtn_side" onclick="toggleMenu()">
+    <h5>MENU</h5>
+  </div>
+
+  <!-- ============================================
+       MENU OVERLAY
+       ============================================ -->
+  <div id="mnu" class="mnu-hid">
+    <div id="cbtn" class="cbtn-hidden" onclick="toggleMenu()">
+      <hr style="transform: rotate(-45deg) translate(-1px, 1px);">
+      <hr style="transform: rotate(45deg)">
+    </div>
+    <div class="col-10">
+      <h1 class="jus">
+        <span class="row">
+          <span class="js-hide" data-emergence="hidden">
+            <del>HOME</del>
+          </span>
+        </span>
+      </h1><br>
+      <h1>
+        <hr class="js-hide" data-emergence="hidden" style="width: 25vw;margin-left:0">
+        <span class="row">
+          <span class="js-hide" data-emergence="hidden">
+            <a href="#projetos">PROJETOS</a>
+          </span>
+        </span>
+      </h1>
+    </div><br><br>
+    <div class="mnub jus flex col-10">
+      <div class="me flex">
+        <div class="flex">
+          <span class="row">
+            <span class="js-hide" data-emergence="hidden">
+              <a id="change-text2" onclick="copyEmail('change-text2')" href="#" class="flex">Entre em contato</a>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="ms social">
+        <span class="row">
+          <span class="js-hide" data-emergence="hidden">
+            <a href="https://github.com/1Kibe" target="_blank">Github</a>
+          </span>
+        </span>
+        <span class="row">
+          <span class="js-hide" data-emergence="hidden">
+            <a href="https://www.linkedin.com/in/ryan-adrian" target="_blank">Linkedin</a>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       MAIN SCROLL CONTENT
+       ============================================ -->
+  <div data-scroll>
+    <div data-scroll-content>
+
+      <!-- ============================================
+           BANNER
+           ============================================ -->
+      <div class="bnr col-12">
+        <div style="overflow-x:hidden;width: 100%">
+          <h1 class="tb sleft">
+            <span class="row">
+              <span data-emergence="hidden">Desenvolvimento</span>
+            </span>
+            <hr data-emergence="hidden" style="width: 12vw;">
+            <span class="row">
+              <span data-emergence="hidden">Backend</span>
+            </span>
+          </h1>
+          <h1 class="tb sright">
+            <span class="row">
+              <span data-emergence="hidden">Java</span>
+            </span>
+            <hr data-emergence="hidden" style="width: 6vw;">
+            <span class="row">
+              <span data-emergence="hidden">Spring Boot</span>
+            </span>
+          </h1>
+          <h1 class="tb sleft">
+            <span class="row">
+              <span data-emergence="hidden">APIs REST</span>
+            </span>
+            <hr data-emergence="hidden" style="width: 8vw;">
+            <span class="row">
+              <span data-emergence="hidden">microsserviços</span>
+            </span>
+          </h1>
+          <h1 class="tb sright">
+            <span class="row">
+              <span data-emergence="hidden">Criar</span>
+            </span>
+            <hr data-emergence="hidden" style="width: 6vw;">
+            <span class="row">
+              <span data-emergence="hidden">Construir</span>
+            </span>
+            <hr data-emergence="hidden" style="width: 6vw;">
+            <span class="row">
+              <span data-emergence="hidden">Escalar</span>
+            </span>
+          </h1>
+        </div>
+        <div class="bl ali flex">
+          <div class="bi imgrev" data-emergence="hidden">
+            <img src="docs/images/IMG_20250919_115501_035.webp" alt="Ryan Adrian" style="border-radius: 8px; object-fit: cover; aspect-ratio: 4/3;">
+          </div>
+          <div class="bt">
+            <p>
+              <span class="row">
+                <span data-emergence="hidden">Olá! Eu sou Ryan,</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">Desenvolvedor Backend</span>
+              </span>
+              <br>
+              <br>
+              <span class="row">
+                <span data-emergence="hidden">Focado em criar sistemas robustos,</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">escaláveis e bem estruturados</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">com Java e Spring Boot.</span>
+              </span>
+              <br>
+            </p>
+          </div>
+          <div class="ba imgrev" data-emergence="hidden">
+            <svg width="70" height="70" viewBox="0 0 24 24" fill="#3ddc84">
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           ABOUT ME
+           ============================================ -->
+      <div class="abt col-10">
+        <h1 class="jus">
+          <span class="row">
+            <span data-emergence="hidden">SOBRE</span>
+          </span>
+          <hr style="width: 54%;" data-emergence="hidden">
+          <span class="row">
+            <span data-emergence="hidden">MIM</span>
+          </span>
+        </h1>
+        <div class="jus flex ali intro">
+          <div>
+            <p>
+              <span class="row">
+                <span data-emergence="hidden">
+                  Atualmente
+                </span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">
+                  atuando como
+                </span>
+              </span>
+              <span class="row highlight-role">
+                <span data-emergence="hidden">
+                  Desenvolvedor Backend
+                  <span style="font-weight:400;font-size:18px;">com foco em</span>
+                  Java &amp; Spring Boot
+                </span>
+              </span>
+            </p>
+          </div>
+          <div>
+            <p>
+              <span class="row">
+                <span data-emergence="hidden">Construindo sistemas confiáveis</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">do conceito à produção.</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">Apaixonado por arquitetura limpa.</span>
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div style="padding: 2vw 0 2vw 0;">
+          <h1 class="jus">
+            <span class="row">
+              <span data-emergence="hidden">EXPERI</span>
+            </span>
+            <hr style="width: 47%; height: 10px;" data-emergence="hidden">
+            <span class="row">
+              <span data-emergence="hidden">ÊNCIA</span>
+            </span>
+          </h1>
+
+          <div style="padding: 3vw 0;">
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+            <div style="padding: 2vw 0;">
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 1.8em; color: #19191b;">
+                <span class="row">
+                  <span data-emergence="hidden">Projetos Freelancer & Pessoais</span>
+                </span>
+              </p>
+              <p style="color: #19191b; margin-top: 5px;">
+                <span class="row">
+                  <span data-emergence="hidden">
+                    <span style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700;">Desenvolvedor Backend &nbsp;|&nbsp; 2023 - Presente</span>
+                  </span>
+                </span>
+              </p>
+              <p style="margin-top: 15px;">
+                <span class="row">
+                  <span data-emergence="hidden"> - Desenvolvimento de APIs REST com Java e Spring Boot para sistemas web.</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden"> - Modelagem de banco de dados relacionais (MySQL, PostgreSQL) e não-relacionais (MongoDB).</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden"> - Implementação de autenticação e autorização com Spring Security e JWT.</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden"> - Práticas de CI/CD com GitHub Actions para deploy automatizado.</span>
+                </span>
+              </p>
+            </div>
+
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+            <div style="padding: 2vw 0;">
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 1.8em; color: #19191b;">
+                <span class="row">
+                  <span data-emergence="hidden">Estudos & Aprendizado Contínuo</span>
+                </span>
+              </p>
+              <p style="color: #19191b; margin-top: 5px;">
+                <span class="row">
+                  <span data-emergence="hidden">
+                    <span style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700;">Desenvolvedor Autodidata &nbsp;|&nbsp; 2022 - Presente</span>
+                  </span>
+                </span>
+              </p>
+              <p style="margin-top: 15px;">
+                <span class="row">
+                  <span data-emergence="hidden"> - Aprofundamento contínuo em Java, Spring Framework e ecossistema Spring.</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden"> - Estudo de arquitetura de software, padrões de projeto e boas práticas.</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden"> - Desenvolvimento de projetos práticos para consolidação de conhecimentos.</span>
+                </span>
+              </p>
+            </div>
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div style="padding: 2vw 0 5vw 0;">
+          <h1 class="jus">
+            <span class="row">
+              <span data-emergence="hidden">FORMA</span>
+            </span>
+            <hr style="width: 47%; height: 10px;" data-emergence="hidden">
+            <span class="row">
+              <span data-emergence="hidden">ÇÃO</span>
+            </span>
+          </h1>
+
+          <div style="padding: 3vw 0;">
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+            <div style="padding: 2vw 0;">
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 1.8em; color: #19191b;">
+                <span class="row">
+                  <span data-emergence="hidden">Anhanguera de Arapongas</span>
+                </span>
+              </p>
+              <p style="color: #19191b; margin-top: 5px;">
+                <span class="row">
+                  <span data-emergence="hidden">
+                    <span style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700;">Análise e Desenvolvimento de Sistemas &nbsp;|&nbsp; ~2.5 anos</span>
+                  </span>
+                </span>
+              </p>
+              <p style="margin-top: 15px;">
+                <span class="row">
+                  <span data-emergence="hidden">Lógica de programação e estrutura de dados</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">Modelagem de banco de dados relacionais</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">Desenvolvimento de aplicações web</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">Fundamentos de engenharia de software</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">Arquitetura de sistemas</span>
+                </span>
+              </p>
+            </div>
+
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+            <div style="padding: 2vw 0;">
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 1.8em; color: #19191b;">
+                <span class="row">
+                  <span data-emergence="hidden">Aprendizado Contínuo</span>
+                </span>
+              </p>
+              <p style="margin-top: 15px;">
+                <span class="row">
+                  <span data-emergence="hidden">Java e Spring Boot (aprofundamento)</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">APIs RESTful e microsserviços</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">MySQL, PostgreSQL e MongoDB</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">Padrões de projeto e arquitetura limpa</span>
+                </span>
+                <span class="row">
+                  <span data-emergence="hidden">Testes automatizados e CI/CD</span>
+                </span>
+              </p>
+            </div>
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           SKILLS SECTION
+           ============================================ -->
+      <div class="abt col-10">
+        <div style="padding: 0 0 5vw 0;">
+          <h1 class="jus">
+            <span class="row">
+              <span data-emergence="hidden">SKILLS</span>
+            </span>
+            <hr style="width: 50%; height: 10px;" data-emergence="hidden">
+            <span class="row">
+              <span data-emergence="hidden">&amp; STACK</span>
+            </span>
+          </h1>
+
+          <div style="padding: 3vw 0;">
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+            <div style="padding: 2vw 0;">
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 1.8em; color: #19191b;">
+                <span class="row">
+                  <span data-emergence="hidden">Linguagens & Frameworks</span>
+                </span>
+              </p>
+              <p style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Java</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Spring Boot</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Spring Security</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Spring Data JPA</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">JWT</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Hibernate</span></span>
+              </p>
+            </div>
+
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+            <div style="padding: 2vw 0;">
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 1.8em; color: #19191b;">
+                <span class="row">
+                  <span data-emergence="hidden">Banco de Dados</span>
+                </span>
+              </p>
+              <p style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">MySQL</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">PostgreSQL</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">MongoDB</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Flyway</span></span>
+              </p>
+            </div>
+
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+            <div style="padding: 2vw 0;">
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-weight: 700; font-size: 1.8em; color: #19191b;">
+                <span class="row">
+                  <span data-emergence="hidden">Ferramentas & DevOps</span>
+                </span>
+              </p>
+              <p style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Git & GitHub</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Docker</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">GitHub Actions</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Maven</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Postman</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">Swagger</span></span>
+                <span class="row"><span data-emergence="hidden" style="display:inline;background:#e8f5e9;padding:4px 12px;border-radius:4px;font-size:14px;">IntelliJ IDEA</span></span>
+              </p>
+            </div>
+            <hr style="width: 100%; height: 2px; margin: 0;" data-emergence="hidden">
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           SELECTED WORK / PROJETOS
+           ============================================ -->
+      <div class="sw col-10" id="projetos">
+        <div>
+          <h1 class="jus">
+            <span class="row">
+              <span style="transition-delay: .2s" data-emergence="hidden">PROJETOS</span>
+            </span>
+            <hr style="width: 31%;" style="transition-delay: .3s" data-emergence="hidden">
+            <span class="row">
+              <span style="transition-delay: .4s" data-emergence="hidden">EM DESTAQUE</span>
+            </span>
+          </h1>
+          <p class="swdes">
+            <span class="row">
+              <span data-emergence="hidden">
+                Uma seleção de projetos
+              </span>
+            </span>
+            <span class="row">
+              <span data-emergence="hidden">
+                do meu trabalho e explorações.
+              </span>
+            </span>
+          </p>
+        </div>
+        <div class="flex">
+          <div class="scol col-6">
+            <div class="w w-margin">
+              <a href="https://github.com/1Kibe" target="_blank">
+                <div class="imgrev" data-emergence="hidden">
+                  <div class="project-placeholder" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+                    API RESTful
+                  </div>
+                </div>
+              </a>
+              <p>
+                <span class="row">
+                  <span data-emergence="hidden">
+                    API de Gerenciamento
+                  </span>
+                </span>
+              </p>
+              <span class="row">
+                <span data-emergence="hidden">
+                  Backend - Java, Spring Boot, PostgreSQL
+                </span>
+              </span>
+            </div>
+            <div class="w">
+              <a href="https://github.com/1Kibe" target="_blank">
+                <div class="imgrev" data-emergence="hidden">
+                  <div class="project-placeholder" style="background:linear-gradient(135deg,#0f3460,#16213e);">
+                    Auth Service
+                  </div>
+                </div>
+              </a>
+              <p>
+                <span class="row">
+                  <span data-emergence="hidden">
+                    Microsserviço de Autenticação
+                  </span>
+                </span>
+              </p>
+              <span class="row">
+                <span data-emergence="hidden">
+                  Backend - Spring Security, JWT, MongoDB
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="sbot scol col-6">
+            <div class="w w-margin">
+              <a href="https://github.com/1Kibe" target="_blank">
+                <div class="imgrev" data-emergence="hidden">
+                  <div class="project-placeholder" style="background:linear-gradient(135deg,#1b1b2f,#1f4068);">
+                    E-Commerce API
+                  </div>
+                </div>
+              </a>
+              <p>
+                <span class="row">
+                  <span data-emergence="hidden">
+                    Sistema de E-Commerce
+                  </span>
+                </span>
+              </p>
+              <span class="row">
+                <span data-emergence="hidden">
+                  Backend - Spring Boot, MySQL, Docker
+                </span>
+              </span>
+            </div>
+            <div class="w">
+              <a href="https://github.com/1Kibe" target="_blank">
+                <div class="imgrev" data-emergence="hidden">
+                  <div class="project-placeholder" style="background:linear-gradient(135deg,#2d2d44,#1a1a2e);">
+                    Task Manager
+                  </div>
+                </div>
+              </a>
+              <p>
+                <span class="row">
+                  <span data-emergence="hidden">
+                    Gerenciador de Tarefas
+                  </span>
+                </span>
+              </p>
+              <span class="row">
+                <span data-emergence="hidden">
+                  Fullstack - Java, Spring Boot, REST API
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           CONTACT
+           ============================================ -->
+      <div class="con col-10">
+        <div class="flex ali jus">
+          <div class="col-10">
+            <h1 class="flex">
+              <span class="row">
+                <span data-emergence="hidden">CONT</span>
+              </span>
+              <hr data-emergence="hidden" style="width: 67%;">
+            </h1>
+            <h1>
+              <span class="row">
+                <span data-emergence="hidden">ATO</span>
+              </span>
+            </h1>
+          </div>
+          <div class="ctext col-2">
+            <p>
+              <span class="row">
+                <span data-emergence="hidden">Tem um projeto em mente</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">ou quer trabalhar</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">comigo?</span>
+              </span>
+              <br>
+              <span class="row">
+                <span data-emergence="hidden">Fique à vontade para</span>
+              </span>
+              <span class="row">
+                <span data-emergence="hidden">enviar um e-mail.</span>
+              </span>
+            </p>
+            <a id="change-text" onclick="copyEmail('change-text')" class="ce">Entre em contato</a>
+            <span class="c-small row">
+              <span data-emergence="hidden">Feito com 💚 por<br> Ryan Adrian.</span>
+            </span>
+          </div>
+        </div>
+        <div class="flex jus cs">
+          <div class="social">
+            <p>
+              <span class="row">
+                <span data-emergence="hidden">SOCIAL</span>
+              </span>
+            </p>
+            <a href="https://github.com/1Kibe" target="_blank">
+              <span class="row">
+                <span data-emergence="hidden">Github</span>
+              </span>
+            </a>
+            <a href="https://www.linkedin.com/in/ryan-adrian" target="_blank">
+              <span class="row">
+                <span data-emergence="hidden">Linkedin</span>
+              </span>
+            </a>
+            <a href="https://wa.me/5543998233800?text=Olá%20Ryan!%20Vi%20seu%20portfólio." target="_blank">
+              <span class="row">
+                <span data-emergence="hidden">WhatsApp</span>
+              </span>
+            </a>
+          </div>
+          <div class="imgrev" data-emergence="hidden">
+            <div class="contact-gif" style="background:linear-gradient(135deg,#3ddc84,#2ecc71);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:5vw;line-height:1;">{ }</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCROLL-END -->
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script>
+    // ============================================
+    // EMERGENCE - Animated reveal on scroll
+    // Uses IntersectionObserver for modern browsers
+    // ============================================
+    (function () {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -60px 0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          const el = entry.target;
+          if (entry.isIntersecting) {
+            el.setAttribute('data-emergence', 'visible');
+            // For hr elements, also handle the expansion animation
+            if (el.tagName === 'HR') {
+              el.setAttribute('data-emergence', 'visible');
+            }
+          } else {
+            // Reset so it animates again when scrolling back
+            el.setAttribute('data-emergence', 'hidden');
+            if (el.tagName === 'HR') {
+              el.setAttribute('data-emergence', 'hidden');
+            }
+          }
+        });
+      }, observerOptions);
+
+      // Observe all elements with data-emergence="hidden"
+      document.querySelectorAll('[data-emergence="hidden"]').forEach(function (el) {
+        observer.observe(el);
+      });
+
+      // Also observe .js-hide elements
+      document.querySelectorAll('.js-hide').forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+
+    // ============================================
+    // PARALLAX - Horizontal scroll effect on banner text
+    // ============================================
+    (function () {
+      var ticking = false;
+      var lastScrollY = 0;
+
+      function updateParallax() {
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        var banner = document.querySelector('.bnr');
+        if (!banner) return;
+
+        var bannerTop = banner.offsetTop;
+        var bannerHeight = banner.offsetHeight;
+        var viewportHeight = window.innerHeight;
+
+        // Only apply when banner is in view
+        if (scrollY + viewportHeight > bannerTop && scrollY < bannerTop + bannerHeight) {
+          var relativeScroll = scrollY - bannerTop;
+          var maxScroll = bannerHeight + viewportHeight;
+          var progress = Math.max(-1, Math.min(1, relativeScroll / maxScroll));
+
+          var sleftElements = document.querySelectorAll('.sleft');
+          var srightElements = document.querySelectorAll('.sright');
+
+          sleftElements.forEach(function (el) {
+            var factor = 0.2;
+            var offset = progress * (window.innerWidth * factor);
+            el.style.transform = 'translateX(' + offset + 'px)';
+            el.style.transition = 'transform .4s linear';
+          });
+
+          srightElements.forEach(function (el) {
+            var factor = -0.2;
+            var offset = progress * (window.innerWidth * factor);
+            el.style.transform = 'translateX(' + offset + 'px)';
+            el.style.transition = 'transform .4s linear';
+          });
+        }
+
+        lastScrollY = scrollY;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      });
+
+      // Initial call
+      updateParallax();
+    })();
+
+    // ============================================
+    // SIDE LABELS - Show/hide based on scroll
+    // ============================================
+    (function () {
+      var navLeft = document.getElementById('nl');
+      var mbtnSide = document.getElementById('mbtn_side');
+
+      window.addEventListener('scroll', function () {
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollY > 200) {
+          if (navLeft) navLeft.style.opacity = '1';
+          if (mbtnSide) mbtnSide.style.opacity = '1';
+        } else {
+          if (navLeft) navLeft.style.opacity = '0';
+          if (mbtnSide) mbtnSide.style.opacity = '0';
+        }
+      });
+    })();
+
+    // ============================================
+    // MENU TOGGLE
+    // ============================================
+    var menuOpen = false;
+
+    function toggleMenu() {
+      var mnu = document.getElementById('mnu');
+      var mbtn = document.getElementById('mbtn');
+      var cbtn = document.getElementById('cbtn');
+      var menuSpans = mnu ? mnu.querySelectorAll('.js-hide') : [];
+
+      menuOpen = !menuOpen;
+
+      if (menuOpen) {
+        mnu.classList.remove('mnu-hid');
+        mnu.classList.add('mnu-vis');
+        if (mbtn) {
+          mbtn.classList.remove('mbtn-visible');
+          mbtn.classList.add('mbtn-hidden');
+        }
+        if (cbtn) {
+          cbtn.classList.remove('cbtn-hidden');
+          cbtn.classList.add('cbtn-visible');
+        }
+        // Reveal menu items
+        menuSpans.forEach(function (span) {
+          span.setAttribute('data-emergence', 'visible');
+        });
+      } else {
+        mnu.classList.remove('mnu-vis');
+        mnu.classList.add('mnu-hid');
+        if (mbtn) {
+          mbtn.classList.remove('mbtn-hidden');
+          mbtn.classList.add('mbtn-visible');
+        }
+        if (cbtn) {
+          cbtn.classList.remove('cbtn-visible');
+          cbtn.classList.add('cbtn-hidden');
+        }
+        // Hide menu items
+        menuSpans.forEach(function (span) {
+          span.setAttribute('data-emergence', 'hidden');
+        });
+      }
+    }
+
+    // ============================================
+    // COPY EMAIL TO CLIPBOARD
+    // ============================================
+    var emailAddress = 'ryanadrianprado2022@gmail.com';
+
+    function copyEmail(elementId) {
+      navigator.clipboard.writeText(emailAddress)
+        .then(function () {
+          var el = document.getElementById(elementId);
+          if (el) {
+            var originalText = el.innerHTML;
+            el.innerHTML = 'email copiado!';
+            el.style.color = '#2ecc71';
+            setTimeout(function () {
+              el.innerHTML = originalText;
+              el.style.color = '';
+            }, 5000);
+          }
+        })
+        .catch(function () {
+          // Fallback for older browsers
+          var textarea = document.createElement('textarea');
+          textarea.value = emailAddress;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            document.execCommand('copy');
+            alert('Email copiado: ' + emailAddress);
+          } catch (err) {
+            alert('Email: ' + emailAddress);
+          }
+          document.body.removeChild(textarea);
+        });
+    }
+  </script>
+</body>
+
+</html>

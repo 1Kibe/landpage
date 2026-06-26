@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan Adrian — Desenvolvedor Backend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0d0d0d;
+        }
+
+        /* Wrapper principal com borda interna */
+        .page-frame {
+            position: fixed;
+            inset: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #0d0d0d;
+        }
+
+        /* Fundo ASCII dither ocupa todo o frame */
+        .ascii-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* Overlay escuro leve para legibilidade */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.18);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           NAVEGAÇÃO SUPERIOR
+        ============================================ */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 36px;
+        }
+
+        nav a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        /* ============================================
+           CONTEÚDO CENTRAL
+        ============================================ */
+        .hero {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .hero-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 8px;
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(6rem, 14vw, 13rem);
+            font-weight: 400;
+            line-height: 0.9;
+            color: #f5f0e8;
+            letter-spacing: -0.02em;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.9;
+            letter-spacing: 0.03em;
+        }
+
+        .hero-subtitle p {
+            margin: 0;
+        }
+
+        /* ============================================
+           BARRA INFERIOR
+        ============================================ */
+        .bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 36px;
+        }
+
+        .bottom-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .bottom-icons a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .bottom-icons a:hover {
+            color: #ffffff;
+        }
+
+        .bottom-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .bottom-handle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .bottom-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            padding: 8px 18px;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-cta:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.7);
+            color: #ffffff;
+        }
+
+        .bottom-cta svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ============================================
+           ASCII DITHER — COVER (zoom sem distorção)
+        ============================================ */
+        [data-ascii-dither-bg] {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+        ============================================ */
+        @media (max-width: 768px) {
+            .page-frame {
+                inset: 6px;
+            }
+
+            nav {
+                padding: 20px 20px;
+            }
+
+            nav a {
+                font-size: 0.62rem;
+                letter-spacing: 0.1em;
+            }
+
+            .hero-name {
+                font-size: clamp(4.5rem, 18vw, 7rem);
+            }
+
+            .bottom-bar {
+                padding: 18px 20px;
+            }
+
+            .bottom-handle {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a:not(:first-child):not(:last-child) {
+                display: none;
+            }
+
+            .hero-name {
+                font-size: clamp(4rem, 20vw, 6rem);
+            }
+
+            .hero-subtitle {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Frame principal -->
+    <div class="page-frame">
+
+        <!-- Fundo ASCII Dither -->
+        <div class="ascii-bg">
+            <div data-ascii-dither-bg aria-hidden="true" style="position:absolute;top:0;left:0;right:0;bottom:auto;height:100%;z-index:0;pointer-events:none;overflow:hidden"></div>
+        </div>
+
+        <!-- Overlay -->
+        <div class="overlay"></div>
+
+        <!-- Navegação Superior -->
+        <nav>
+            <a href="#" style="pointer-events:none;">BACKEND / JAVA</a>
+            <a href="https://github.com/1Kibe?tab=repositories" target="_blank">PROJETOS</a>
+        </nav>
+
+        <!-- Conteúdo Central -->
+        <div class="hero">
+            <h1 class="hero-name">Ryan</h1>
+            <div class="hero-subtitle">
+                <p>Desenvolvedor Backend</p>
+                <p>Especialista em Java e Spring Boot</p>
+                <p>Disponível para Oportunidades</p>
+            </div>
+        </div>
+
+        <!-- Barra Inferior -->
+        <div class="bottom-bar">
+            <!-- Ícones sociais -->
+            <div class="bottom-icons">
+                <!-- GitHub -->
+                <a href="https://github.com/1Kibe" target="_blank" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                </a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/ryan-adrian-919b1930b" target="_blank" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <!-- Email -->
+                <a href="mailto:ryanadrianprado2022@gmail.com" aria-label="Email">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Handle -->
+            <a href="https://www.instagram.com/ryan_apenas" target="_blank" class="bottom-handle" style="text-decoration:none;">@ryan_apenas</a>
+
+            <!-- Botão CTA -->
+            <a href="https://wa.me/5543998233800?text=Olá%20Ryan!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar." target="_blank" class="bottom-cta">
+                Contato
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Script ASCII Dither Background -->
+    <script src="./ascii-dither-background.js"></script>
+
+    <script>
+        (function () {
+            function applyAsciiCover() {
+                var mount = document.querySelector('[data-ascii-dither-bg]');
+                if (!mount) return;
+                var canvases = mount.querySelectorAll('canvas');
+                var fw = mount.offsetWidth;
+                var fh = mount.offsetHeight;
+                canvases.forEach(function (c) {
+                    var cw = c.width, ch = c.height;
+                    if (!cw || !ch) return;
+                    var scale = Math.max(fw / cw, fh / ch);
+                    c.style.setProperty('position', 'absolute', 'important');
+                    c.style.setProperty('top', '50%', 'important');
+                    c.style.setProperty('left', '50%', 'important');
+                    c.style.setProperty('width', (cw * scale) + 'px', 'important');
+                    c.style.setProperty('height', (ch * scale) + 'px', 'important');
+                    c.style.setProperty('max-width', 'none', 'important');
+                    c.style.setProperty('max-height', 'none', 'important');
+                    c.style.setProperty('transform', 'translate(-50%, -50%)', 'important');
+                    c.style.setProperty('mask-image', 'none', 'important');
+                    c.style.setProperty('-webkit-mask-image', 'none', 'important');
+                });
+            }
+            // Aguarda o script inicializar e depois aplica
+            setTimeout(applyAsciiCover, 400);
+            window.addEventListener('resize', applyAsciiCover);
+        })();
+    </script>
+</body>
+</html>
