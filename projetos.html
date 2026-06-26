@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos — Ryan Adrian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #0d0d0d;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+
+        /* Frame com borda igual ao index3 */
+        .page-frame {
+            position: fixed;
+            inset: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Fundo ASCII */
+        .ascii-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        /* CSS cover para o novo background */
+        [data-ascii-dither-bg] {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+        }
+
+        /* Overlay mais escuro para legibilidade dos cards */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           NAVEGAÇÃO
+        ============================================ */
+        nav {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 36px;
+            flex-shrink: 0;
+        }
+
+        nav a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        nav .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav .nav-back svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ============================================
+           CONTEÚDO PRINCIPAL
+        ============================================ */
+        .main-content {
+            position: relative;
+            z-index: 5;
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 36px 80px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.15) transparent;
+        }
+
+        .main-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .main-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .main-content::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.15);
+            border-radius: 2px;
+        }
+
+        /* Título da página */
+        .page-header {
+            padding: 10px 0 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 36px;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 400;
+            color: #f5f0e8;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Grid de projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        /* Card individual */
+        .project-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 22px 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .project-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .project-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+        }
+
+        .project-icon {
+            flex-shrink: 0;
+            opacity: 0.45;
+        }
+
+        .project-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .project-description {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .project-description.empty {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .project-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 4px;
+        }
+
+        .project-lang {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .lang-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .project-stars {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .project-stars svg {
+            width: 12px;
+            height: 12px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+        }
+
+        /* Estado de carregamento */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            gap: 12px;
+        }
+
+        .loading-state p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .loading-dots span {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            animation: blink 1.2s infinite;
+        }
+
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes blink {
+            0%, 80%, 100% { opacity: 0.2; }
+            40% { opacity: 1; }
+        }
+
+        /* Erro */
+        .error-state {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.82rem;
+        }
+
+        /* ============================================
+           BARRA INFERIOR
+        ============================================ */
+        .bottom-bar {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 36px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .bottom-count {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .bottom-link {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.7);
+        }
+
+        .bottom-link svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+        ============================================ */
+        @media (max-width: 768px) {
+            .page-frame { inset: 6px; }
+            nav { padding: 18px 20px; }
+            .main-content { padding: 0 20px 80px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .bottom-bar { padding: 14px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-frame">
+
+        <!-- Fundo ASCII Dither (novo background) -->
+        <div class="ascii-bg">
+            <div data-ascii-dither-bg aria-hidden="true" style="position:absolute;top:0;left:0;right:0;bottom:auto;height:100vh;z-index:0;pointer-events:none;overflow:hidden"></div>
+        </div>
+
+        <!-- Overlay -->
+        <div class="overlay"></div>
+
+        <!-- Navegação -->
+        <nav>
+            <a href="./index3.html" class="nav-back">
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                Voltar
+            </a>
+            <a href="https://github.com/1Kibe?tab=repositories" target="_blank">GitHub</a>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <div class="page-header">
+                <h1>Projetos</h1>
+                <p>Repositórios públicos — Ryan Adrian</p>
+            </div>
+
+            <!-- Grid gerado via JS -->
+            <div class="projects-grid" id="projects-grid">
+                <div class="loading-state">
+                    <div class="loading-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <p>Carregando repositórios</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra Inferior -->
+        <div class="bottom-bar">
+            <span class="bottom-count" id="repo-count">—</span>
+            <a href="https://github.com/1Kibe" target="_blank" class="bottom-link">
+                Ver no GitHub
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Novo ASCII dither background -->
+    <script src="./ascii-dither-projects.js"></script>
+
+    <!-- Cover effect para o background -->
+    <script>
+        (function () {
+            function applyAsciiCover() {
+                var mount = document.querySelector('[data-ascii-dither-bg]');
+                if (!mount) return;
+                var canvases = mount.querySelectorAll('canvas');
+                var fw = mount.offsetWidth;
+                var fh = mount.offsetHeight;
+                canvases.forEach(function (c) {
+                    var cw = c.width, ch = c.height;
+                    if (!cw || !ch) return;
+                    var scale = Math.max(fw / cw, fh / ch);
+                    c.style.setProperty('position', 'absolute', 'important');
+                    c.style.setProperty('top', '50%', 'important');
+                    c.style.setProperty('left', '50%', 'important');
+                    c.style.setProperty('width', (cw * scale) + 'px', 'important');
+                    c.style.setProperty('height', (ch * scale) + 'px', 'important');
+                    c.style.setProperty('max-width', 'none', 'important');
+                    c.style.setProperty('max-height', 'none', 'important');
+                    c.style.setProperty('transform', 'translate(-50%, -50%)', 'important');
+                    c.style.setProperty('mask-image', 'none', 'important');
+                    c.style.setProperty('-webkit-mask-image', 'none', 'important');
+                });
+            }
+            setTimeout(applyAsciiCover, 400);
+            window.addEventListener('resize', applyAsciiCover);
+        })();
+    </script>
+
+    <!-- Busca repositórios do GitHub -->
+    <script>
+        const LANG_COLORS = {
+            'Java': '#b07219',
+            'JavaScript': '#f1e05a',
+            'TypeScript': '#3178c6',
+            'Python': '#3572A5',
+            'HTML': '#e34c26',
+            'CSS': '#563d7c',
+            'Shell': '#89e051',
+            'Go': '#00ADD8',
+            'Rust': '#dea584',
+            'C': '#555555',
+            'C++': '#f34b7d',
+            'C#': '#178600',
+            'Kotlin': '#A97BFF',
+            'Ruby': '#701516',
+            'PHP': '#4F5D95',
+        };
+
+        function langColor(lang) {
+            return LANG_COLORS[lang] || 'rgba(255,255,255,0.3)';
+        }
+
+        function renderProjects(repos) {
+            const grid = document.getElementById('projects-grid');
+            const counter = document.getElementById('repo-count');
+
+            counter.textContent = repos.length + ' repositório' + (repos.length !== 1 ? 's' : '');
+
+            if (!repos.length) {
+                grid.innerHTML = '<div class="error-state">Nenhum repositório encontrado.</div>';
+                return;
+            }
+
+            grid.innerHTML = repos.map(repo => `
+                <a href="${repo.html_url}" target="_blank" class="project-card">
+                    <div class="project-card-header">
+                        <span class="project-name">${repo.name}</span>
+                        <span class="project-icon">
+                            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </span>
+                    </div>
+                    <p class="project-description ${!repo.description ? 'empty' : ''}">
+                        ${repo.description || 'Sem descrição'}
+                    </p>
+                    <div class="project-footer">
+                        ${repo.language ? `
+                        <span class="project-lang">
+                            <span class="lang-dot" style="background:${langColor(repo.language)}"></span>
+                            ${repo.language}
+                        </span>` : ''}
+                        ${repo.stargazers_count > 0 ? `
+                        <span class="project-stars">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            ${repo.stargazers_count}
+                        </span>` : ''}
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function showError() {
+            document.getElementById('projects-grid').innerHTML =
+                '<div class="error-state">Não foi possível carregar os repositórios.<br>Verifique sua conexão ou acesse o GitHub diretamente.</div>';
+            document.getElementById('repo-count').textContent = '—';
+        }
+
+        fetch('https://api.github.com/users/1Kibe/repos?sort=updated&per_page=30')
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function(repos) {
+                var filtered = repos.filter(function(r) { return !r.fork; });
+                renderProjects(filtered);
+            })
+            .catch(showError);
+    </script>
+
+</body>
+</html>
