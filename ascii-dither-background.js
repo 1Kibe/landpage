@@ -4,19 +4,19 @@
   "customCharset": " .:-=+*#%@",
   "brailleVariant": "sparse",
   "fontSize": 9,
-  "hoverStrength": 4,
+  "hoverStrength": 17,
   "mouseInteractionMode": "push",
-  "mouseAreaSize": 40,
-  "mouseSpread": 0.25,
+  "mouseAreaSize": 147,
+  "mouseSpread": 0.4,
   "charSpacing": 1,
   "renderFont": "\"VT323\", \"Arial\", sans-serif",
-  "outputAspect": "1:1",
+  "outputAspect": "4:3",
   "contrast": 1.1,
   "brightness": -23,
   "opacity": 1,
   "vignette": 0,
   "borderGlow": 0,
-  "bgDither": 0.9,
+  "bgDither": 0,
   "inverseDither": 0,
   "invert": false,
   "ditherType": "none",
@@ -39,8 +39,8 @@
   "lineWidth": 1.5,
   "lineThickness": 3.9,
   "lineRotation": -46,
-  "overlayPreset": "none",
-  "overlayStrength": 0.5,
+  "overlayPreset": "glitch",
+  "overlayStrength": 0.05,
   "noiseScale": 59,
   "noiseSpeed": 1.4,
   "noiseDirection": "bottom-right",
@@ -94,9 +94,9 @@
   const IS_TRANSPARENT_BG = Boolean(EXPORT_OPTIONS.transparentBackground);
   const WATERMARK_LABEL = String(EXPORT_OPTIONS.watermarkText || "Made in ASC11");
 
-  const CHARSETS = {"standard":" .:-=+*#%@","blocks":" ░▒▓█","detailed":" .'`^\",:;Il!i><~+_-?][}{1)(|\\\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$","minimal":" ·░█","binary":" 01","letters-alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZ","letters-lowercase":"abcdefghijklmnopqrstuvwxyz","letters-mixed":"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz","letters-symbols":"@#$%&*+=-<>~","braille":" ⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿"};
-  const BRAILLE_VARIANTS = {"standard":" ⠁⠂⠃⠄⠅⠆⠇⠈⠉⠊⠋⠌⠍⠎⠏⠐⠑⠒⠓⠔⠕⠖⠗⠘⠙⠚⠛⠜⠝⠞⠟⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿","sparse":" ⠁⠂⠄⠈⠐⠠⡀⢀⣀⣿","dense":" ⠃⠇⠏⠟⠿"};
-  const MATRIX_CHARS = " アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+  const CHARSETS = {"standard":" .:-=+*#%@","blocks":" ÔûæÔûÆÔûôÔûê","detailed":" .'`^\",:;Il!i><~+_-?][}{1)(|\\\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$","minimal":" ┬ÀÔûæÔûê","binary":" 01","letters-alphabet":"ABCDEFGHIJKLMNOPQRSTUVWXYZ","letters-lowercase":"abcdefghijklmnopqrstuvwxyz","letters-mixed":"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz","letters-symbols":"@#$%&*+=-<>~","braille":" ÔáüÔáéÔáâÔáäÔáàÔáåÔáçÔáêÔáëÔáèÔáïÔáîÔáìÔáÄÔáÅÔáÉÔáæÔáÆÔáôÔáöÔáòÔáûÔáùÔáÿÔáÖÔáÜÔáøÔá£ÔáØÔá×ÔáƒÔááÔáíÔáóÔáúÔáñÔáÑÔáªÔáºÔá¿Ôá®Ôá¬Ôá½Ôá¼Ôá¡Ôá«Ôá»Ôá░Ôá▒Ôá▓Ôá│Ôá┤ÔáÁÔáÂÔáÀÔá©Ôá╣Ôá║Ôá╗Ôá╝Ôá¢Ôá¥Ôá┐"};
+  const BRAILLE_VARIANTS = {"standard":" ÔáüÔáéÔáâÔáäÔáàÔáåÔáçÔáêÔáëÔáèÔáïÔáîÔáìÔáÄÔáÅÔáÉÔáæÔáÆÔáôÔáöÔáòÔáûÔáùÔáÿÔáÖÔáÜÔáøÔá£ÔáØÔá×ÔáƒÔááÔáíÔáóÔáúÔáñÔáÑÔáªÔáºÔá¿Ôá®Ôá¬Ôá½Ôá¼Ôá¡Ôá«Ôá»Ôá░Ôá▒Ôá▓Ôá│Ôá┤ÔáÁÔáÂÔáÀÔá©Ôá╣Ôá║Ôá╗Ôá╝Ôá¢Ôá¥Ôá┐","sparse":" ÔáüÔáéÔáäÔáêÔáÉÔááÔíÇÔóÇÔúÇÔú┐","dense":" ÔáâÔáçÔáÅÔáƒÔá┐"};
+  const MATRIX_CHARS = " ÒéóÒéñÒéªÒé¿Òé¬Òé½Òé¡Òé»Òé▒Òé│ÒéÁÒéÀÒé╣Òé╗Òé¢Òé┐ÒâüÒâäÒâåÒâêÒâèÒâïÒâîÒâìÒâÄÒâÅÒâÆÒâòÒâÿÒâøÒâ×ÒâƒÒâáÒâíÒâóÒâñÒâªÒâ¿Òâ®Òâ¬Òâ½Òâ¼Òâ¡Òâ»Òâ▓Òâ│";
   const HALFTONE_CHARS = " .,:;irsXA253hMHGS#9B&@";
   const RETRO_CHARS = "o";
   const TERMINAL_CHARSET_PRESETS = {"binary":" 010101","brackets":" []/\\<>","symbols":" $_+","mixed":" 01[]/\\<>$_+|","matrix":" 01{}[]/\\<>|_+-"};
@@ -2479,8 +2479,8 @@ void main() {
       return charset[clamp(idx, 0, charset.length - 1)];
     }
     if (SETTINGS.style === 'dotcross') {
-      const dotRamp = '  .·:oO';
-      const crossRamp = '  ·+xX#';
+      const dotRamp = '  .┬À:oO';
+      const crossRamp = '  ┬À+xX#';
       const screen =
         (Math.sin((x * 0.82 + y * 0.33) * 1.55) + Math.cos((x * 0.27 - y * 0.94) * 1.25) + 2) * 0.25;
       const adjusted = clamp(Math.pow(normalized, 0.9) * 0.82 + screen * 0.18, 0, 1);
