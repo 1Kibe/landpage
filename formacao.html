@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formação — Ryan Adrian</title>
+    <meta name="description" content="Formação de Ryan Adrian — graduação em Análise e Desenvolvimento de Sistemas, cursos e idiomas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            background: #0d0d0d;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+
+        /* Frame com borda igual ao index3 */
+        .page-frame {
+            position: fixed;
+            inset: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #0d0d0d;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Fundo ASCII */
+        .ascii-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        [data-ascii-dither-bg] {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+        }
+
+        /* Vinheta: escurece onde tem texto, deixa o fundo vivo na direita */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                linear-gradient(to bottom, rgba(5,5,7,0.62) 0, rgba(5,5,7,0) 170px),
+                linear-gradient(to top, rgba(5,5,7,0.68) 0, rgba(5,5,7,0) 150px),
+                linear-gradient(90deg,
+                    rgba(5,5,7,0.80) 0px,
+                    rgba(5,5,7,0.74) 620px,
+                    rgba(5,5,7,0.42) 950px,
+                    rgba(5,5,7,0.08) 1300px);
+        }
+
+        /* ============================================
+           NAVEGAÇÃO
+        ============================================ */
+        nav {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 36px;
+            flex-shrink: 0;
+        }
+
+        nav a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            text-shadow: 0 1px 12px rgba(0,0,0,0.85);
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a:focus-visible {
+            color: #ffffff;
+            outline: none;
+        }
+
+        nav .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav .nav-back svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ============================================
+           CONTEÚDO PRINCIPAL
+        ============================================ */
+        .main-content {
+            position: relative;
+            z-index: 5;
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 36px 60px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.15) transparent;
+        }
+
+        .main-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .main-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .main-content::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.15);
+            border-radius: 2px;
+        }
+
+        /* Coluna de leitura — segura o texto dentro da faixa escura */
+        .page-header,
+        .works {
+            max-width: 940px;
+        }
+
+        /* Título da página */
+        .page-header {
+            padding: 10px 0 36px;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 400;
+            color: #f5f0e8;
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 34px rgba(0,0,0,0.75);
+        }
+
+        .page-header p {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.68);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-shadow: 0 1px 14px rgba(0,0,0,0.8);
+        }
+
+        /* ============================================
+           LISTA DE TRABALHOS
+        ============================================ */
+        .works {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid rgba(255,255,255,0.14);
+        }
+
+        .work {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 28px;
+            align-items: start;
+            padding: 30px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.14);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.3s ease, padding 0.3s ease;
+        }
+
+
+        .work-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding-top: 6px;
+        }
+
+        .work-year {
+            font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.62);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .work-role {
+            font-size: 0.66rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        .work-body {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .work-body h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 400;
+            font-size: 1.9rem;
+            line-height: 1.1;
+            color: #f5f0e8;
+        }
+
+        .work-body p {
+            max-width: 58ch;
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.74);
+        }
+
+        .work-stack {
+            font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+
+
+
+
+        /* ============================================
+           BARRA INFERIOR
+        ============================================ */
+        .bottom-bar {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 36px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(to top, rgba(5,5,7,0.9), rgba(5,5,7,0.25));
+            flex-shrink: 0;
+        }
+
+        .bottom-count {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+        }
+
+        .bottom-link {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-link:hover,
+        .bottom-link:focus-visible {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.7);
+            outline: none;
+        }
+
+        .bottom-link svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+        ============================================ */
+        @media (max-width: 768px) {
+            .page-frame { inset: 6px; }
+
+            nav { padding: 16px 18px; }
+            nav a { font-size: 0.64rem; letter-spacing: 0.1em; white-space: nowrap; }
+
+            .main-content { padding: 0 18px 32px; }
+
+            /* No celular o degradê lateral não faz sentido: vinheta vertical */
+            .overlay {
+                background: linear-gradient(to bottom,
+                    rgba(5,5,7,0.80) 0,
+                    rgba(5,5,7,0.58) 18%,
+                    rgba(5,5,7,0.58) 76%,
+                    rgba(5,5,7,0.84) 100%);
+            }
+
+            .page-header { padding: 4px 0 26px; }
+            .page-header p { font-size: 0.72rem; letter-spacing: 0.08em; }
+
+            .work {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 24px 2px;
+            }
+
+
+            .work-meta {
+                flex-direction: row;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 6px 14px;
+                padding-top: 0;
+            }
+
+            .work-body h2 { font-size: 1.55rem; }
+            .work-body p { font-size: 0.86rem; }
+
+            .bottom-bar { padding: 12px 18px; }
+        }
+
+        /* Telas estreitas: a barra de baixo não pode sumir atrás do navegador */
+        @supports (height: 100dvh) {
+            @media (max-width: 768px) {
+                .page-frame { height: calc(100dvh - 12px); }
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-frame">
+
+        <!-- Fundo ASCII Dither -->
+        <div class="ascii-bg">
+            <div data-ascii-dither-bg aria-hidden="true" style="position:absolute;top:0;left:0;right:0;bottom:auto;height:100vh;z-index:0;pointer-events:none;overflow:hidden"></div>
+        </div>
+
+        <!-- Overlay -->
+        <div class="overlay"></div>
+
+        <!-- Navegação -->
+        <nav>
+            <a href="./index.html" class="nav-back">
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                Voltar
+            </a>
+            <a href="./trabalhos.html">Trabalhos</a>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <div class="page-header">
+                <h1>Formação</h1>
+                <p>Graduação, cursos e idiomas — Ryan Adrian</p>
+            </div>
+
+            <div class="works">
+
+                <div class="work">
+                    <div class="work-meta">
+                        <span class="work-year">Concluído</span>
+                        <span class="work-role">Graduação</span>
+                    </div>
+                    <div class="work-body">
+                        <h2>Análise e Desenvolvimento de Sistemas</h2>
+                        <p>Universidade Anhanguera. Curso concluído, diploma emitido. Base em
+                           estruturas de dados, banco de dados, engenharia de software e
+                           desenvolvimento web.</p>
+                    </div>
+                </div>
+
+                <div class="work">
+                    <div class="work-meta">
+                        <span class="work-year">1 ano</span>
+                        <span class="work-role">Mercado</span>
+                    </div>
+                    <div class="work-body">
+                        <h2>Experiência profissional</h2>
+                        <p>Um ano atuando como desenvolvedor, do levantamento ao deploy: APIs REST
+                           em Java e Spring Boot, modelagem de banco e sistemas entregues em
+                           produção.</p>
+                    </div>
+                </div>
+
+                <div class="work">
+                    <div class="work-meta">
+                        <span class="work-year">Java</span>
+                        <span class="work-role">AlgaWorks</span>
+                    </div>
+                    <div class="work-body">
+                        <h2>Cursos de Java e Spring</h2>
+                        <p>Formação da AlgaWorks em Java e Spring Boot — APIs REST, JPA/Hibernate,
+                           camadas de serviço e boas práticas de projeto.</p>
+                    </div>
+                </div>
+
+                <div class="work">
+                    <div class="work-meta">
+                        <span class="work-year">Intermediário</span>
+                        <span class="work-role">Idioma</span>
+                    </div>
+                    <div class="work-body">
+                        <h2>Inglês</h2>
+                        <p>Leitura corrente de documentação técnica, issues e código de terceiros;
+                           comunicação escrita no dia a dia.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Barra Inferior -->
+        <div class="bottom-bar">
+            <span class="bottom-count">Anhanguera · ADS</span>
+            <a href="https://wa.me/5543998233800?text=Olá%20Ryan!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener" class="bottom-link">
+                Contato
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- ASCII dither background desta aba -->
+    <script src="./ascii-dither-formacao.js?v=1"></script>
+
+    <!-- Cover effect para o background -->
+    <script>
+        (function () {
+            function applyAsciiCover() {
+                var mount = document.querySelector('[data-ascii-dither-bg]');
+                if (!mount) return;
+                var canvases = mount.querySelectorAll('canvas');
+                var fw = mount.offsetWidth;
+                var fh = mount.offsetHeight;
+                canvases.forEach(function (c) {
+                    var cw = c.width, ch = c.height;
+                    if (!cw || !ch) return;
+                    var scale = Math.max(fw / cw, fh / ch);
+                    c.style.setProperty('position', 'absolute', 'important');
+                    c.style.setProperty('top', '50%', 'important');
+                    c.style.setProperty('left', '50%', 'important');
+                    c.style.setProperty('width', (cw * scale) + 'px', 'important');
+                    c.style.setProperty('height', (ch * scale) + 'px', 'important');
+                    c.style.setProperty('max-width', 'none', 'important');
+                    c.style.setProperty('max-height', 'none', 'important');
+                    c.style.setProperty('transform', 'translate(-50%, -50%)', 'important');
+                    c.style.setProperty('mask-image', 'none', 'important');
+                    c.style.setProperty('-webkit-mask-image', 'none', 'important');
+                });
+            }
+            setTimeout(applyAsciiCover, 400);
+            window.addEventListener('resize', applyAsciiCover);
+        })();
+    </script>
+
+</body>
+</html>
