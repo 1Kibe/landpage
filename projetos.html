@@ -17,6 +17,7 @@
         html, body {
             width: 100%;
             height: 100%;
+            -webkit-text-size-adjust: 100%;
             background: #0d0d0d;
             font-family: 'Inter', sans-serif;
             color: #fff;
@@ -367,10 +368,36 @@
         ============================================ */
         @media (max-width: 768px) {
             .page-frame { inset: 6px; }
-            nav { padding: 18px 20px; }
-            .main-content { padding: 0 20px 80px; }
-            .projects-grid { grid-template-columns: 1fr; }
-            .bottom-bar { padding: 14px 20px; }
+
+            nav { padding: 16px 18px; }
+            nav a { font-size: 0.64rem; letter-spacing: 0.1em; white-space: nowrap; }
+
+            .main-content { padding: 0 18px 32px; }
+            .projects-grid { grid-template-columns: 1fr; gap: 12px; }
+
+            /* Fundo mais denso no celular: o card precisa de mais corpo */
+            .project-card {
+                background: rgba(0, 0, 0, 0.42);
+                border-color: rgba(255, 255, 255, 0.14);
+                padding: 18px 18px;
+            }
+
+            .page-header {
+                padding: 4px 0 26px;
+                margin-bottom: 26px;
+            }
+
+            .page-header h1 { font-size: clamp(2.6rem, 13vw, 3.6rem); }
+            .page-header p { font-size: 0.72rem; letter-spacing: 0.08em; }
+
+            .bottom-bar { padding: 12px 18px; }
+        }
+
+        /* A barra de baixo não pode sumir atrás da barra do navegador */
+        @supports (height: 100dvh) {
+            @media (max-width: 768px) {
+                .page-frame { height: calc(100dvh - 12px); }
+            }
         }
     </style>
 </head>
@@ -425,7 +452,7 @@
     </div>
 
     <!-- Novo ASCII dither background -->
-    <script src="./ascii-dither-projects.js"></script>
+    <script src="./ascii-dither-projects.js?v=3"></script>
 
     <!-- Cover effect para o background -->
     <script>

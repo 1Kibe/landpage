@@ -68,6 +68,11 @@
   "webglOverlayColor": "#99bbff",
   "themeOutputInvert": false
 };
+  // Telas estreitas: grade um pouco mais densa que a do desktop, sem exagero.
+  if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+    SETTINGS.fontSize = 11;
+    SETTINGS.charSpacing = Math.min(SETTINGS.charSpacing ?? 1, 1.2);
+  }
   const EXPORT_OPTIONS = {"enableInteractionEffects":true,"transparentBackground":true,"enableAlphaMask":true,"alphaMaskEnd":85,"enableFadeIn":true,"fadeInDurationMs":900,"pauseWhenOffscreen":true,"adaptivePerformance":true,"maxFps":60,"idleFps":12,"visibilityThreshold":0.01,"reportFps":false,"enableWatermark":false,"watermarkText":"Made in ASC11"};
   const SOURCE = {
   "type": "image",
@@ -3121,6 +3126,13 @@ void main() {
         return;
       }
       contentAspect = requestedAspect || sourceSize.width / sourceSize.height;
+      // Quando o canvas ficaria bem mais largo que o container (celular, tablet,
+      // janela estreita), gera ele ja no formato do container: o sampler abaixo
+      // faz cover-crop da imagem. Sem isso o CSS amplia pra cobrir e vira zoom.
+      const containerAspect = viewWidth / Math.max(viewHeight, 1);
+      if (contentAspect > containerAspect * 1.15) {
+        contentAspect = containerAspect;
+      }
 
       if (SOURCE.type === 'video' && isPlayableVideoSource(source)) {
         const sourceDuration = Number(source.duration);

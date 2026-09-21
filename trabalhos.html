@@ -18,6 +18,7 @@
         html, body {
             width: 100%;
             height: 100%;
+            -webkit-text-size-adjust: 100%;
             background: #0d0d0d;
             font-family: 'Inter', sans-serif;
             color: #fff;
@@ -202,7 +203,7 @@
         .work-meta {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 5px;
             padding-top: 6px;
         }
 
@@ -344,23 +345,53 @@
         ============================================ */
         @media (max-width: 768px) {
             .page-frame { inset: 6px; }
-            nav { padding: 18px 20px; }
-            .main-content { padding: 0 20px 40px; }
+
+            nav { padding: 16px 18px; }
+            nav a { font-size: 0.64rem; letter-spacing: 0.1em; white-space: nowrap; }
+
+            .main-content { padding: 0 18px 32px; }
+
+            /* No celular o degradê lateral não faz sentido: vinheta vertical */
+            .overlay {
+                background: linear-gradient(to bottom,
+                    rgba(5,5,7,0.80) 0,
+                    rgba(5,5,7,0.58) 18%,
+                    rgba(5,5,7,0.58) 76%,
+                    rgba(5,5,7,0.84) 100%);
+            }
+
+            .page-header { padding: 4px 0 26px; }
+            .page-header p { font-size: 0.72rem; letter-spacing: 0.08em; }
+
             .work {
                 grid-template-columns: 1fr;
-                gap: 14px;
-                padding: 24px 4px;
+                gap: 12px;
+                padding: 24px 2px;
             }
+
+            .work:hover,
+            .work:focus-visible { padding-left: 2px; padding-right: 2px; }
+
             .work-meta {
                 flex-direction: row;
                 align-items: center;
-                gap: 14px;
+                flex-wrap: wrap;
+                gap: 6px 14px;
                 padding-top: 0;
             }
-            .work-role br { display: none; }
-            .work-cta { padding-top: 0; }
-            .work-body h2 { font-size: 1.6rem; }
-            .bottom-bar { padding: 14px 20px; }
+
+            .work-body h2 { font-size: 1.55rem; }
+            .work-body p { font-size: 0.86rem; }
+            .work-cta { padding-top: 2px; }
+
+            .bottom-bar { padding: 12px 18px; }
+        }
+
+        /* Telas estreitas: a barra de baixo não pode sumir atrás do navegador */
+        @supports (height: 100dvh) {
+            @media (max-width: 768px) {
+                .page-frame { height: calc(100dvh - 12px); }
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -401,7 +432,8 @@
                 <a class="work" href="https://appchessclub.com.br" target="_blank" rel="noopener">
                     <div class="work-meta">
                         <span class="work-year">2026</span>
-                        <span class="work-role">Full stack<br>Produção</span>
+                        <span class="work-role">Full stack</span>
+                        <span class="work-role">Produção</span>
                     </div>
                     <div class="work-body">
                         <h2>Chess Club</h2>
@@ -420,7 +452,8 @@
                 <a class="work" href="https://kibesurdo00-pyrenote.static.hf.space/index.html" target="_blank" rel="noopener">
                     <div class="work-meta">
                         <span class="work-year">2026</span>
-                        <span class="work-role">Front end<br>Projeto próprio</span>
+                        <span class="work-role">Front end</span>
+                        <span class="work-role">Projeto próprio</span>
                     </div>
                     <div class="work-body">
                         <h2>PyreNote</h2>
@@ -450,7 +483,7 @@
     </div>
 
     <!-- ASCII dither background desta aba -->
-    <script src="./ascii-dither-trabalhos.js"></script>
+    <script src="./ascii-dither-trabalhos.js?v=3"></script>
 
     <!-- Cover effect para o background -->
     <script>
