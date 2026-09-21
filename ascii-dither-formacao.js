@@ -86,11 +86,9 @@
   "dither2MouseInteractionEnabled": true,
   "themeOutputInvert": false
 };
-  // Telas estreitas: grade um pouco mais densa que a do desktop, sem exagero.
-  if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-    SETTINGS.fontSize = 11;
-    SETTINGS.charSpacing = Math.min(SETTINGS.charSpacing ?? 1, 1.2);
-  }
+  // Sem override de fontSize aqui: este fundo usa style "line", e o comprimento
+  // do traco vem do tamanho da celula. Encolher a fonte vira risco sobreposto.
+  // O zoom no celular ja e resolvido pelo recorte no formato do container.
   const EXPORT_OPTIONS = {"enableInteractionEffects":true,"transparentBackground":true,"enableAlphaMask":true,"alphaMaskEnd":85,"enableFadeIn":true,"fadeInDurationMs":900,"pauseWhenOffscreen":true,"adaptivePerformance":true,"maxFps":60,"idleFps":12,"visibilityThreshold":0.01,"reportFps":false,"enableWatermark":false,"watermarkText":"Made in ASC11"};
   const SOURCE = {
   "type": "image",
